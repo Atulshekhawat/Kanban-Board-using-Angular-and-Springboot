@@ -1,4 +1,4 @@
-package com.niit.UserAuthenticationService;
+package com.example.UserAuthenticationService;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

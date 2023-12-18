@@ -3,16 +3,21 @@ package com.niit.UserRegisterService.domain;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
+
+
 @Entity
 public class User {
     @Id
     private String userEmail;
-    private int userId;
+    private String userId;
     private String userName;
     private String password;
     private String creatorEmail;
 
-    public User(String userEmail, int userId, String userName, String password, String creatorEmail) {
+    public User() {
+    }
+
+    public User(String userEmail, String userId, String userName, String password, String creatorEmail) {
         this.userEmail = userEmail;
         this.userId = userId;
         this.userName = userName;
@@ -28,11 +33,11 @@ public class User {
         this.userEmail = userEmail;
     }
 
-    public int getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 

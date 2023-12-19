@@ -26,11 +26,5 @@ public class UserServiceImpl implements UserService {
         return userRepository.save(user);
     }
 
-    @Override
-    public void deleteUser(User user) throws InvalidCredentialsException {
-        User deleteUser = userRepository.findByUserNameAndCreatorEmail(user.getUserEmail(), user.getCreatorEmail());
-        if (deleteUser == null)
-            throw new InvalidCredentialsException();
-        userRepository.delete(deleteUser);
-    }
+
 }

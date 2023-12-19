@@ -7,5 +7,4 @@ import com.niit.UserRegisterService.exception.UserAlreadyExistsException;
 public interface UserService {
     public User registerUser(User user) throws UserAlreadyExistsException;
 
-    public void deleteUser(User user) throws InvalidCredentialsException;
 }

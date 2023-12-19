@@ -4,6 +4,9 @@ import com.niit.UserRegisterService.domain.User;
 import com.niit.UserRegisterService.exception.InvalidCredentialsException;
 import com.niit.UserRegisterService.exception.UserAlreadyExistsException;
 import com.niit.UserRegisterService.service.UserService;
+import io.jsonwebtoken.Claims;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,20 +33,6 @@ public class UserController {
         } catch (Exception ex) {
             responseEntity = new ResponseEntity<>(ex.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        return responseEntity;
-    }
-
-    @DeleteMapping("/user/{userEmail}")
-    public ResponseEntity<?> deleteUser(@RequestBody User user) throws InvalidCredentialsException{
-        try {
-            userService.deleteUser(user);
-            responseEntity = new ResponseEntity<>("user deleted", HttpStatus.OK);
-        } catch (InvalidCredentialsException ex) {
-            throw new InvalidCredentialsException();
-        } catch (Exception ex ) {
-            responseEntity = new ResponseEntity<>(ex.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-
         return responseEntity;
     }
  }

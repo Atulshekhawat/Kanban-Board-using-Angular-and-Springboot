@@ -1,11 +1,8 @@
 package com.niit.UserTaskService.domain;
 
-import jakarta.persistence.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.Field;
-import org.springframework.data.mongodb.core.mapping.FieldType;
+import org.springframework.data.annotation.Id;
 
-@Document
+
 public class Task {
 
    @Id

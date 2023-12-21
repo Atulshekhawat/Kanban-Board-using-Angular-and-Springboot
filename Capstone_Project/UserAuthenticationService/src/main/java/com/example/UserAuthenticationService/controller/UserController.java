@@ -42,7 +42,7 @@ public class UserController {
 
     }
 
-    @GetMapping("/login")
+    @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody User user) throws InvalidCredentialsException {
         // Generate the token on login,
         // return 200 status if user is saved else 500 status

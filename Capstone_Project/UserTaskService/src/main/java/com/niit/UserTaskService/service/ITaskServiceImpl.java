@@ -7,7 +7,7 @@ import com.niit.UserTaskService.exception.TaskNotFoundException;
 import com.niit.UserTaskService.exception.UserAlreadyExistsException;
 import com.niit.UserTaskService.exception.UserNotFoundException;
 import com.niit.UserTaskService.proxy.UserProxy;
-import com.niit.UserTaskService.repository.UserRepository;
+import com.niit.UserTaskService.repository.UserTaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -17,24 +17,24 @@ import java.util.Iterator;
 import java.util.List;
 
 @Service
-public class UserServiceImpl implements UserService {
+public class ITaskServiceImpl implements ITaskService {
 
-    private UserRepository userRepository;
+    private UserTaskRepository userTaskRepository;
 
     private UserProxy userProxy;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository, UserProxy userProxy) {
-        this.userRepository = userRepository;
+    public ITaskServiceImpl(UserTaskRepository userTaskRepository, UserProxy userProxy) {
+        this.userTaskRepository = userTaskRepository;
         this.userProxy = userProxy;
     }
 
     @Override
     public User registerUser(User user) throws UserAlreadyExistsException {
-        if (userRepository.findById(user.getUserEmail()).isPresent()) {
+        if (userTaskRepository.findById(user.getUserEmail()).isPresent()) {
             throw new UserAlreadyExistsException();
         }
-        User savedUser = userRepository.save(user);
+        User savedUser = userTaskRepository.save(user);
         if (!(savedUser.getUserEmail().isEmpty())) {
             ResponseEntity<?> savedData = userProxy.saveUser(user);
             System.out.println(savedData.getBody());
@@ -45,10 +45,14 @@ public class UserServiceImpl implements UserService {
     @Override
     public User saveTaskToTaskList(Task task, String userEmail) throws TaskAlreadyExistsException, UserNotFoundException {
         // Save the task to task list of user.
-        if (userRepository.findById(userEmail).isEmpty()) {
+        if (userTaskRepository.findById(userEmail).isEmpty()) {
             throw new UserNotFoundException();
         }
-        User user = userRepository.findById(userEmail).orElseThrow(UserNotFoundException::new);
+
+        User user = userTaskRepository.findById(userEmail).orElseThrow(UserNotFoundException::new);
+        if (user.getTaskslist() != null && user.getTaskslist().stream().anyMatch(t -> t.getTaskId() == task.getTaskId())) {
+            throw new TaskAlreadyExistsException();
+        }
         if (user.getTaskslist() == null) {
             user.setTaskslist(Arrays.asList(task));
         } else {
@@ -56,18 +60,18 @@ public class UserServiceImpl implements UserService {
             tasks.add(task);
             user.setTaskslist(tasks);
         }
-        return userRepository.save(user);
+        return userTaskRepository.save(user);
     }
 
     @Override
     public User updateUserTaskInTaskList(String userEmail, Task task) throws UserNotFoundException, TaskNotFoundException, TaskAlreadyExistsException {
         // Update the specific track details
         boolean flag = false;
-        if (userRepository.findById(userEmail).isEmpty()) {
+        if (userTaskRepository.findById(userEmail).isEmpty()) {
             throw new UserNotFoundException();
         }
 
-        User user = userRepository.findById(userEmail).get();
+        User user = userTaskRepository.findById(userEmail).get();
         List<Task> taskList = user.getTaskslist();
 
         Iterator<Task> taskIterator = taskList.iterator();
@@ -93,23 +97,34 @@ public class UserServiceImpl implements UserService {
             throw new TaskNotFoundException();
         }
         user.setTaskslist(taskList);
-        return userRepository.save(user);
+        return userTaskRepository.save(user);
     }
 
     @Override
-    public User deleteTrack(String userId, String trackId) throws TaskNotFoundException, UserNotFoundException {
+    public User deleteTask(String userId, int trackId) throws TaskNotFoundException, UserNotFoundException {
         // delete the user details specified
         boolean userIdIsPresent = false;
-        if(userRepository.findById(userId).isEmpty()) {
+        if(userTaskRepository.findById(userId).isEmpty()) {
             throw new UserNotFoundException();
         }
-        User user = userRepository.findById(userId).get();
-        List<Task> tasks = user.getTaskslist();
-        userIdIsPresent = tasks.removeIf(x -> Integer.toString(x.getTaskId()).equals(trackId));
+        User user = userTaskRepository.findById(userId).get();
+        List<Task> tracks = user.getTaskslist();
+        userIdIsPresent = tracks.removeIf(x -> x.getTaskId() == trackId);
         if(!userIdIsPresent) {
             throw  new TaskNotFoundException();
         }
-        user.setTaskslist(tasks);
-        return userRepository.save(user);
+        user.setTaskslist(tracks);
+        return userTaskRepository.save(user);
+    }
+
+    @Override
+    public List<Task> getAllUserTasksFromTaskList(String userEmail) throws Exception {
+        // Get all the tracks for a specific user
+        if (userTaskRepository.findById(userEmail).isEmpty())
+        {
+            throw new UserNotFoundException();
+        }
+        return userTaskRepository.findById(userEmail).get().getTaskslist();
+
     }
 }

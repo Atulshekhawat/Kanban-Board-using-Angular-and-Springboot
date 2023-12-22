@@ -1,0 +1,25 @@
+#buttons {
+    position: absolute;
+    right: 20px;
+    padding: 10px;
+  }
+  button {
+    margin-left: 20px;
+  }
+  
+  mat-icon {
+    margin-right: 15px;
+    cursor: pointer;
+  }
+  
+  a {
+    text-decoration: none;
+    color: black;
+  }
+  
+  @media (max-width: 380px) {
+    a h1,
+    #icons {
+      display: none;
+    }
+  }

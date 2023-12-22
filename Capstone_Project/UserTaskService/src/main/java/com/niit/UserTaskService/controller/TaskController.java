@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1")
+@CrossOrigin("*")
 public class TaskController {
 
     private ITaskService iTaskService;
@@ -36,6 +37,22 @@ public class TaskController {
             responseEntity = new ResponseEntity<>(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
         return responseEntity;
+    }
+
+    @PutMapping("user/updateUser/{userEmail}")
+    public ResponseEntity<?> update(@RequestBody User user,HttpServletRequest request){
+        try{
+            System.out.println("header" + request.getHeader("Authorization"));
+            Claims claims = (Claims) request.getAttribute("claims");
+            System.out.println("id from claims :: " + claims.getSubject());
+            String id = claims.getSubject();
+            System.out.println("id :: " + id);
+            responseEntity = new ResponseEntity<>(iTaskService.updateUser(id,user),HttpStatus.OK);
+        }catch (Exception e) {
+            responseEntity = new ResponseEntity<>("Could not update!!", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        return responseEntity;
+
     }
 
     @PostMapping("user/saveTask")

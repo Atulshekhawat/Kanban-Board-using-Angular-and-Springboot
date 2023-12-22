@@ -11,6 +11,8 @@ import java.util.List;
 
 public interface ITaskService {
     public User registerUser(User user) throws UserAlreadyExistsException;
+
+    User updateUser(String userEmail,User user);
     User saveTaskToTaskList(Task task, String userEmail) throws TaskAlreadyExistsException, UserNotFoundException;
     User updateUserTaskInTaskList(String userEmail,Task task) throws UserNotFoundException, TaskNotFoundException, TaskAlreadyExistsException;
     User deleteTask(String userEmail,int taskId) throws TaskNotFoundException, UserNotFoundException;

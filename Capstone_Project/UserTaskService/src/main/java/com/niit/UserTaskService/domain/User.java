@@ -11,7 +11,6 @@ import java.util.List;
 public class User {
         @Id
         private String userEmail;
-        private String userId;
         private String userName;
         private String password;
         private List<Task> taskslist;
@@ -20,9 +19,8 @@ public class User {
     }
 
 
-    public User(String userEmail, String userId, String userName, String password, List<Task> taskslist) {
+    public User(String userEmail, String userName, String password, List<Task> taskslist) {
         this.userEmail = userEmail;
-        this.userId = userId;
         this.userName = userName;
         this.password = password;
         this.taskslist = taskslist;
@@ -36,13 +34,6 @@ public class User {
         this.userEmail = userEmail;
     }
 
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
 
     public String getUserName() {
         return userName;
@@ -73,7 +64,6 @@ public class User {
     public String toString() {
         return "User{" +
                 "userEmail='" + userEmail + '\'' +
-                ", userId='" + userId + '\'' +
                 ", userName='" + userName + '\'' +
                 ", password='" + password + '\'' +
                 ", taskslist=" + taskslist +

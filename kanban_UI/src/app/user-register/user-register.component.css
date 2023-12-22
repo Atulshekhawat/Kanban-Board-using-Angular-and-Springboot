@@ -1,0 +1,40 @@
+/* register-form.component.css */
+ 
+
+.example-full-width {
+    width: 700px;
+    margin-top: 15px;
+}
+  
+mat-form-field {
+    width: 80%;
+    margin-top: 8px;
+}
+
+#container{
+    border: 2px solid black;
+    width: 60%;
+    margin: 5% auto;
+    border-radius: 14px;
+}
+
+h2{
+  margin-top: 5%;
+  margin-left: 8%;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: xxx-large;
+
+}
+#register-container{
+    display: flex;
+}
+
+.form{
+  margin: 6% auto;
+  margin-left: 4.5%;
+}
+
+button {
+  margin-top: 20%;
+  margin-left: 1.9rem;
+}

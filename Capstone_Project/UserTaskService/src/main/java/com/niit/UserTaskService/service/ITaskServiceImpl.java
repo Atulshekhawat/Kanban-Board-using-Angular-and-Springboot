@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ITaskServiceImpl implements ITaskService {
@@ -42,6 +43,22 @@ public class ITaskServiceImpl implements ITaskService {
         return savedUser;
     }
 
+    @Override
+    public User updateUser(String userEmail,User user) {
+        Optional<User> optTask = userTaskRepository.findById(userEmail);
+        if (optTask.isEmpty())
+        {
+            return null;
+        }
+        User existingUser = optTask.get();
+        if(user.getUserName()!=null){
+            existingUser.setUserName(user.getUserName());
+        }
+        if(user.getPassword()!=null){
+            existingUser.setPassword(user.getPassword());
+        }
+        return userTaskRepository.save(existingUser);
+    }
     @Override
     public User saveTaskToTaskList(Task task, String userEmail) throws TaskAlreadyExistsException, UserNotFoundException {
         // Save the task to task list of user.

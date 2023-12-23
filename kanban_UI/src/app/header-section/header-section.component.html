@@ -2,8 +2,10 @@
     <mat-toolbar color="primary">
       <a routerLink=""><h1>KanBan Board</h1></a>
       <div id="buttons">
-            <button routerLink="login" mat-raised-button color="primary">login</button>
-            <button routerLink="register" mat-raised-button color="primary">Register</button>
+            <button *ngIf="!loggedIn" routerLink="login" mat-raised-button color="primary">Login</button>
+            <button *ngIf="!loggedIn" routerLink="register" mat-raised-button color="primary">Register</button>
+            <button *ngIf="loggedIn"  mat-raised-button color="primary">User</button>
+            <button *ngIf="loggedIn" (click)="logoutUser()" mat-raised-button color="primary">Logout</button>
       </div>
     </mat-toolbar>
 </div>

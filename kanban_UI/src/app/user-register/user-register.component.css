@@ -12,17 +12,15 @@ mat-form-field {
 
 #container{
     width: 70%;
-    margin: 5% auto;
+    margin: 3% auto;
     border-radius: 14px;
 }
 
 h2{
-  margin-top: 3%;
-  margin-left: 20%;
+  margin-left: 7%;
   font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  font-size: xxx-large;
-
-}
+  font-size: xx-large;
+  }
 #register-container{
     display: flex;
 }
@@ -38,5 +36,7 @@ img{
 
 button {
   margin-top: 8%;
-  margin-left: 3.9rem;
+  margin-left: .9rem;
+  width: 33%;
+  border-radius: 50px;
 }

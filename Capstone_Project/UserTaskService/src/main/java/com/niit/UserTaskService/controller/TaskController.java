@@ -15,8 +15,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/api/v1")
-@CrossOrigin("*")
+
 public class TaskController {
 
     private ITaskService iTaskService;

@@ -1,17 +1,54 @@
-<div>
+<!-- <div class="login-container">
+  <div class="login">
     <h2>Login Form</h2>
-    <form #loginForm="ngForm">
-        <mat-form-field>
+    <form (ngSubmit)="onSubmit()">
+        <mat-form-field appearance="outline">
           <label for="userEmail">User Email</label>
-          <input matInput type="email" id="userEmail" name="userEmail" required>
+          <input matInput type="text" id="userEmail" name="userEmail" [(ngModel)]="credentials.userEmail" required>
         </mat-form-field>
       
-        <mat-form-field>
+        <mat-form-field appearance="outline">
           <label for="password">Password</label>
-          <input matInput type="password" id="password" name="password"required>
+          <input matInput type="password" id="password" name="password" [(ngModel)]="credentials.password" required>
         </mat-form-field>
       
-        <button mat-raised-button type="submit">Login</button>
+        <button type="submit" mat-raised-button color="primary">Login</button>
+        <button type="reset" mat-raised-button color="accent">Reset</button>
       </form>
+      <p>  {{credentials | json}}</p>  
+  </div>
+
+  <div class="image">
+    <img src="../../assets/login-image3.png" alt="" width="600px" height="630px">
+  </div>
+
+</div> -->
+
+
+<!-- register-form.component.html -->
+<div id="container">
+  <div id="login-container">
+    <div class="image">
+      <img src="../../assets/login-image3.png" width="500px" height="550px" alt="">
+    </div>
+    <div class="form">
+      <h2>Welcome Back !</h2>
+      <form (ngSubmit)="onSubmit()">
+        <mat-form-field appearance="outline">
+          <mat-label for="userEmail">User Email</mat-label>
+          <input matInput type="text" id="userEmail" name="userEmail" [(ngModel)]="credentials.userEmail" required>
+        </mat-form-field>
+      
+        <mat-form-field appearance="outline">
+          <mat-label for="password">Password</mat-label>
+          <input matInput type="password" id="password" name="password" [(ngModel)]="credentials.password" required>
+        </mat-form-field>
+      
+        <button type="submit" mat-raised-button color="primary">Login</button>
+        <button type="reset" mat-raised-button color="warn">Reset</button>
+      </form>
+      <!-- <p>  {{credentials | json}}</p>   -->
+    </div>
+  </div>
 </div>
 

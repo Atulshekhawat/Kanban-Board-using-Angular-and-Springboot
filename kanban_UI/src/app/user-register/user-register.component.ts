@@ -20,6 +20,7 @@ export class UserRegisterComponent {
     this.UserServiceService.register(this.userData).subscribe(
       res => {
         console.log(res);
+        alert("User Register Successfully");
       }
     );
 

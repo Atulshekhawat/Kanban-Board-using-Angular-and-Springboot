@@ -1,9 +1,8 @@
 <!-- register-form.component.html -->
-<h2>Sign up</h2>
 <div id="container">
   <div id="register-container">
     <div class="form">
-
+      <h2>Sign up</h2>
       <form #registerForm="ngForm" (ngSubmit)="register()">
         <mat-form-field appearance="outline">
           <mat-label for="username">Your Name</mat-label>
@@ -18,15 +17,12 @@
           <input matInput type="password" placeholder="Enter your password" name="password" id="password"
             [(ngModel)]="userData.password">
         </mat-form-field>
-        <mat-form-field appearance="outline">
-          <mat-label for="password">Confirm Password</mat-label>
-          <input matInput type="password" placeholder="Confirm password" name="Confirm Password" id="password">
-        </mat-form-field>
         <button mat-raised-button type="submit" color="primary">Register Now</button>
+        <button mat-raised-button type="reset" color="warn">Reset</button>
       </form>
     </div>
     <div class="image">
-      <img src="../../assets/signin-image2.png" alt="">
+      <img src="../../assets/signin-image2.png" width="500px" height="550px" alt="">
     </div>
   </div>
 </div>

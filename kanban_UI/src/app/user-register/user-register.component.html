@@ -2,7 +2,7 @@
 <div id="container">
   <div id="register-container">
     <div class="form">
-      <h2>Sign up</h2>
+      <h2>CREATE ACCOUNT</h2>
       <form #registerForm="ngForm" (ngSubmit)="register()">
         <mat-form-field appearance="outline">
           <mat-label for="username">Your Name</mat-label>
@@ -17,6 +17,7 @@
           <input matInput type="password" placeholder="Enter your password" name="password" id="password"
             [(ngModel)]="userData.password">
         </mat-form-field>
+        <p><input type="checkbox"> I agree to the <a href="">Terms and Conditions</a></p>
         <button mat-raised-button type="submit" color="primary">Register Now</button>
         <button mat-raised-button type="reset" color="warn">Reset</button>
       </form>

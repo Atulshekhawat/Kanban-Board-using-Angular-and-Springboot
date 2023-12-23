@@ -7,4 +7,7 @@ import { Component } from '@angular/core';
 })
 export class FooterSectionComponent {
 
+  footer(){
+    alert("Under maintenance")
+  }
 }

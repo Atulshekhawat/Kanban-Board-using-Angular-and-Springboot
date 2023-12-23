@@ -1,9 +1,9 @@
 <!-- register-form.component.html -->
-
+<h2>Sign up</h2>
 <div id="container">
-  <h2>Sign up</h2>
   <div id="register-container">
     <div class="form">
+
       <form #registerForm="ngForm" (ngSubmit)="register()">
         <mat-form-field appearance="outline">
           <mat-label for="username">Your Name</mat-label>
@@ -11,11 +11,16 @@
         </mat-form-field>
         <mat-form-field appearance="outline">
           <mat-label for="email">Your Email</mat-label>
-            <input matInput type="email" placeholder="Enter your email" name="email" [(ngModel)]="userData.userEmail">
+          <input matInput type="email" placeholder="Enter your email" name="email" [(ngModel)]="userData.userEmail">
         </mat-form-field>
         <mat-form-field appearance="outline">
           <mat-label for="password">Password</mat-label>
-          <input matInput type="password" placeholder="Enter your password" name="password" id="password" [(ngModel)]="userData.password">
+          <input matInput type="password" placeholder="Enter your password" name="password" id="password"
+            [(ngModel)]="userData.password">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label for="password">Confirm Password</mat-label>
+          <input matInput type="password" placeholder="Confirm password" name="Confirm Password" id="password">
         </mat-form-field>
         <button mat-raised-button type="submit" color="primary">Register Now</button>
       </form>
@@ -26,30 +31,3 @@
   </div>
 </div>
 
-
-  
-  <!-- <div class="container">
-    <h1>Register</h1>
-    <hr>
-
-    <div class="details">
-    <label for="email"><b>Email</b></label>
-    <input type="email" placeholder="Enter Email" name="email" id="email" required>
-    </div>
-
-    <div class="details">
-    <label for="username"><b>Username</b></label>
-    <input type="text" placeholder="Enter Username" name="username" id="username" required>
-    </div>
-
-    <div class="details">
-    <label for="psw"><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" name="psw" id="psw" required>
-    </div>
-
-    <button type="submit" class="registerbtn">Register</button><br>
-  </div>
-  
-  <div class="container signin">
-    <p>Already have an account? <a href="#">Sign in</a>.</p>
-  </div> -->

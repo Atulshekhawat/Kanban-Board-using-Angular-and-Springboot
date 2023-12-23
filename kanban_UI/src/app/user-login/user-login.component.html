@@ -1,1 +1,17 @@
-<p>user-login works!</p>
+<div>
+    <h2>Login Form</h2>
+    <form #loginForm="ngForm">
+        <mat-form-field>
+          <label for="userEmail">User Email</label>
+          <input matInput type="email" id="userEmail" name="userEmail" required>
+        </mat-form-field>
+      
+        <mat-form-field>
+          <label for="password">Password</label>
+          <input matInput type="password" id="password" name="password"required>
+        </mat-form-field>
+      
+        <button mat-raised-button type="submit">Login</button>
+      </form>
+</div>
+

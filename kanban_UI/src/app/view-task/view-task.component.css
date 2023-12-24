@@ -1,0 +1,14 @@
+
+
+mat-card {
+    max-width: 400px;
+    margin: 20px auto;
+}
+  
+mat-card-header {
+    background-color: #1976D2;
+    color: white;
+}
+.arrow-dropdown{
+    margin-left: 80%;
+}

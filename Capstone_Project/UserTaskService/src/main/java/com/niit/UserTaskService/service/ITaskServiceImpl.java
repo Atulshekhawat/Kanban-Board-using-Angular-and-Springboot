@@ -126,7 +126,7 @@ public class ITaskServiceImpl implements ITaskService {
         }
         User user = userTaskRepository.findById(userId).get();
         List<Task> tracks = user.getTaskslist();
-        userIdIsPresent = tracks.removeIf(x -> x.getTaskId() == trackId);
+        userIdIsPresent = tracks.removeIf(x -> x.getTaskId().equals(trackId) );
         if(!userIdIsPresent) {
             throw  new TaskNotFoundException();
         }

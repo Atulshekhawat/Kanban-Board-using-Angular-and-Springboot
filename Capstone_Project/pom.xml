@@ -66,6 +66,7 @@
 		<module>UserAuthenticationService</module>
 		<module>cloudApi</module>
 		<module>eurekaService</module>
+		<module>MailService</module>
 	</modules>
 
 	<build>

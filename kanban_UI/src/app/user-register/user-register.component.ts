@@ -7,6 +7,7 @@ import { UserServiceService } from '../user-service.service';
   styleUrls: ['./user-register.component.css']
 })
 export class UserRegisterComponent {
+  
 
   constructor(private UserServiceService:UserServiceService){}
   public userData  ={

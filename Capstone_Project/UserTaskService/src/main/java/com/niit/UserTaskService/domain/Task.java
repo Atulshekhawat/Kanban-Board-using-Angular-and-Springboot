@@ -2,11 +2,13 @@ package com.niit.UserTaskService.domain;
 
 import org.springframework.data.annotation.Id;
 
+import java.util.UUID;
+
 
 public class Task {
 
    @Id
-    private int taskId;
+   private UUID taskId = UUID.randomUUID();
     private String taskName;
     private String taskDescription;
     private String assignee;
@@ -17,7 +19,7 @@ public class Task {
     public Task() {
     }
 
-    public Task(int taskId, String taskName, String taskDescription, String assignee, String dueDate, String priority, String status) {
+    public Task(UUID taskId, String taskName, String taskDescription, String assignee, String dueDate, String priority, String status) {
         this.taskId = taskId;
         this.taskName = taskName;
         this.taskDescription = taskDescription;
@@ -27,11 +29,11 @@ public class Task {
         this.status = status;
     }
 
-    public int getTaskId() {
+    public UUID getTaskId() {
         return taskId;
     }
 
-    public void setTaskId(int taskId) {
+    public void setTaskId(UUID taskId) {
         this.taskId = taskId;
     }
 

@@ -1,0 +1,26 @@
+<mat-card>
+    <mat-card-header>
+      <mat-card-title>Task Name</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p>This is a sample task description. It can contain additional details about the task.</p>
+      <p>Assignee: John Doe</p>
+      <p>Due Date: 2023-12-31</p>
+      <p>Status: In Progress</p>
+    </mat-card-content>
+    <mat-card-footer>
+        <hr>
+        <div>
+            <button class="arrow-dropdown" mat-icon-button [matMenuTriggerFor]="statusMenu">
+                <mat-icon color="primary" matTooltip="Move the task to">arrow_drop_down</mat-icon>
+            </button>
+            <mat-menu #statusMenu="matMenu">
+                <button mat-menu-item (click)="moveTaskTo('To Do')">To Do</button>
+                <button mat-menu-item (click)="moveTaskTo('In Progress')">In Progress</button>
+                <button mat-menu-item (click)="moveTaskTo('Completed')">Completed</button>
+                <button mat-menu-item (click)="moveTaskTo('BackLog')">BackLog</button>
+            </mat-menu>
+        </div>
+    </mat-card-footer>
+</mat-card>
+  

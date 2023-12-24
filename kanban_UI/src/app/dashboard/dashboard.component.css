@@ -1,3 +1,50 @@
-h2{
-    text-align: center;
+.kanban-dashboard {
+  display: flex;
+  justify-content: space-around;
+}
+
+.heading{
+    height:90px;
+    margin: auto;
+    margin-top: 1%;
+}
+
+.heading button{
+    margin-left: 91%;
+}
+
+.column {
+  width: 25%;
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin: 10px;
+  margin-top: 1%;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+h3 {
+  height: 8%;
+  font-size: large;
+  margin: 3%;
+  text-align: center;
+}
+.task-item {
+  padding: 5px;
+  margin: 5px 0;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  background-color: #fff;
+}
+
+.todo {
+  border-color: #ffcc00;
+}
+
+.in-progress {
+  border-color: #3399ff;
+}
+
+.done {
+  border-color: #33cc33;
 }

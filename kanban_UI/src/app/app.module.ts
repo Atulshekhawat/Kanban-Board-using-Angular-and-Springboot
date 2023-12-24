@@ -17,6 +17,12 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { AddTaskComponent } from './add-task/add-task.component';
+import { MatDialogModule} from '@angular/material/dialog';
+import {MatCardModule} from '@angular/material/card';
+import {MatSelectModule} from '@angular/material/select';
+import {MatMenuModule} from '@angular/material/menu';
+import { ViewTaskComponent } from './view-task/view-task.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,7 +32,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     UserLoginComponent,
     UserRegisterComponent,
     HeroSectionComponent,
-    DashboardComponent
+    DashboardComponent,
+    AddTaskComponent,
+    ViewTaskComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,9 +45,12 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatIconModule,
     MatToolbarModule,
     MatFormFieldModule,
+    MatCardModule,
     FormsModule,
-    HttpClientModule
-
+    MatSelectModule,
+    MatMenuModule,
+    HttpClientModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

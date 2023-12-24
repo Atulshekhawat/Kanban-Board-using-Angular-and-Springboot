@@ -1,3 +1,39 @@
-<div >
-    <h2>Welcome to Admin Pannel</h2>
+<div class="heading">
+    <h1>Welcome to KanBan Board </h1>
+    <button mat-raised-button color="primary" (click)="openDialog()">Add Task</button>
 </div>
+<div class="kanban-dashboard">
+    <div class="column">
+      <h3>To Do</h3>
+      <hr>
+      <app-view-task></app-view-task>
+      <app-view-task></app-view-task>
+
+    </div>
+  
+    <div class="column">
+      <h3>In Progress</h3>
+      <hr>
+      <!-- <div *ngFor="let task of tasks" [ngClass]="{'task-item': true, 'in-progress': task.status === 'inProgress'}">
+        {{ task.title }}
+      </div> -->
+      <app-view-task></app-view-task>
+    </div>
+  
+    <div class="column">
+      <h3>Completed</h3>
+      <hr>
+      <!-- <div *ngFor="let task of tasks" [ngClass]="{'task-item': true, 'done': task.status === 'done'}">
+        {{ task.title }}
+      </div> -->
+    </div>
+
+    <div class="column">
+        <h3>Back Log</h3>
+        <hr>
+        <!-- <div *ngFor="let task of tasks" [ngClass]="{'task-item': true, 'in-progress': task.status === 'inProgress'}">
+          {{ task.title }}
+        </div> -->
+        <app-view-task></app-view-task>
+      </div>
+  </div>

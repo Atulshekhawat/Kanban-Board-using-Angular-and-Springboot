@@ -11,7 +11,7 @@ public class Task {
    private UUID taskId = UUID.randomUUID();
     private String taskName;
     private String taskDescription;
-    private String assignee;
+    private String assignedTo;
     private String dueDate;
     private String priority; //high,low,medium
     private String status;  //To Do, InProgress,Testing,Completed
@@ -19,11 +19,11 @@ public class Task {
     public Task() {
     }
 
-    public Task(UUID taskId, String taskName, String taskDescription, String assignee, String dueDate, String priority, String status) {
+    public Task(UUID taskId, String taskName, String taskDescription, String assignedTo, String dueDate, String priority, String status) {
         this.taskId = taskId;
         this.taskName = taskName;
         this.taskDescription = taskDescription;
-        this.assignee = assignee;
+        this.assignedTo = assignedTo;
         this.dueDate = dueDate;
         this.priority = priority;
         this.status = status;
@@ -54,11 +54,11 @@ public class Task {
     }
 
     public String getAssignee() {
-        return assignee;
+        return assignedTo;
     }
 
     public void setAssignee(String assignee) {
-        this.assignee = assignee;
+        this.assignedTo = assignedTo;
     }
 
     public String getDueDate() {
@@ -91,7 +91,7 @@ public class Task {
                 "taskId=" + taskId +
                 ", taskName='" + taskName + '\'' +
                 ", taskDescription='" + taskDescription + '\'' +
-                ", assignee='" + assignee + '\'' +
+                ", assignedTo='" + assignedTo + '\'' +
                 ", dueDate='" + dueDate + '\'' +
                 ", priority='" + priority + '\'' +
                 ", status='" + status + '\'' +

@@ -9,6 +9,7 @@ mat-card-header {
     background-color: #1976D2;
     color: white;
 }
-.arrow-dropdown{
-    margin-left: 80%;
+
+button{
+    padding-left:30px;
 }

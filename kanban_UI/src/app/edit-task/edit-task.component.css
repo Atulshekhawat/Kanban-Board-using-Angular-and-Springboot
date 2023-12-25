@@ -1,0 +1,25 @@
+.container{
+    width: 770px;
+    height: 500px;
+    display: flex;
+}
+
+mat-form-field{
+    width: 320px;
+}
+
+h2{
+    text-align: center;
+}
+
+.form{
+    margin-top: 30px;
+    width: 3px;
+    margin-left: 4%;
+}
+
+button{
+    margin-left: 91%;
+    width: 100px;
+}
+

@@ -14,7 +14,7 @@ import {MatIconModule} from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { AddTaskComponent } from './add-task/add-task.component';
@@ -23,6 +23,11 @@ import {MatCardModule} from '@angular/material/card';
 import {MatSelectModule} from '@angular/material/select';
 import {MatMenuModule} from '@angular/material/menu';
 import { ViewTaskComponent } from './view-task/view-task.component';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule} from '@angular/material/core';
+import { HttpIntercepterService } from './services/http-intercepter.service';
+import { EditTaskComponent } from './edit-task/edit-task.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,6 +40,7 @@ import { ViewTaskComponent } from './view-task/view-task.component';
     DashboardComponent,
     AddTaskComponent,
     ViewTaskComponent,
+    EditTaskComponent,
   ],
   imports: [
     BrowserModule,
@@ -49,10 +55,12 @@ import { ViewTaskComponent } from './view-task/view-task.component';
     FormsModule,
     MatSelectModule,
     MatMenuModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     HttpClientModule,
     MatDialogModule
   ],
-  providers: [],
+  providers: [{provide: HTTP_INTERCEPTORS, useClass: HttpIntercepterService, multi: true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

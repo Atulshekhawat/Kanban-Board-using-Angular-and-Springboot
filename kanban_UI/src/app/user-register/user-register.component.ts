@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { UserServiceService } from '../user-service.service';
+import { UserServiceService } from '../services/user-service.service';
 
 @Component({
   selector: 'app-user-register',

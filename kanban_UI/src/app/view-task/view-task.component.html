@@ -4,13 +4,15 @@
     </mat-card-header>
     <mat-card-content>
       <p>This is a sample task description. It can contain additional details about the task.</p>
-      <p>Assignee: John Doe</p>
+      <p>Assigned To: User1</p>
       <p>Due Date: 2023-12-31</p>
-      <p>Status: In Progress</p>
     </mat-card-content>
     <mat-card-footer>
         <hr>
         <div>
+            <button mat-button (click)="openDialog()" color="primary">Edit</button>
+            <button mat-button color="accent">Delete</button>
+            <button mat-button color="warn">Priority</button>
             <button class="arrow-dropdown" mat-icon-button [matMenuTriggerFor]="statusMenu">
                 <mat-icon color="primary" matTooltip="Move the task to">arrow_drop_down</mat-icon>
             </button>

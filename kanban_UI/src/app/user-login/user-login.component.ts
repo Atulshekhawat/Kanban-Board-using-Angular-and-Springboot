@@ -17,7 +17,7 @@ export class UserLoginComponent {
 
   onSubmit(){
     if((this.credentials.userEmail !='' && this.credentials.password !='') && (this.credentials.userEmail!=null && this.credentials.password!=null)){
-      console.log("We have to submit the form to server");
+      // console.log("We have to submit the form to server");
       // token generate
       this.loginService.generateToken(this.credentials).subscribe(
         (resp:any) => {

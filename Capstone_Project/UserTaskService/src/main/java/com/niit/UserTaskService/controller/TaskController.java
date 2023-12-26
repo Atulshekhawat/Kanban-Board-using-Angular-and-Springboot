@@ -14,6 +14,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.UUID;
+
 @RestController
 @CrossOrigin(origins = "*")
 @RequestMapping("/api/v1")
@@ -50,7 +52,7 @@ public class TaskController {
             System.out.println("id :: " + id);
             responseEntity = new ResponseEntity<>(iTaskService.updateUser(id,user),HttpStatus.OK);
         }catch (Exception e) {
-            responseEntity = new ResponseEntity<>("Could not update!!", HttpStatus.INTERNAL_SERVER_ERROR);
+          responseEntity = new ResponseEntity<>("Could not update!!", HttpStatus.INTERNAL_SERVER_ERROR);
         }
         return responseEntity;
 
@@ -89,12 +91,13 @@ public class TaskController {
             responseEntity = new ResponseEntity<>(iTaskService.updateUserTaskInTaskList(id, task), HttpStatus.OK);
         } catch (Exception e) {
             responseEntity = new ResponseEntity<>("Could not update!!", HttpStatus.INTERNAL_SERVER_ERROR);
+//            System.out.println(e);
         }
         return responseEntity;
     }
 
     @DeleteMapping("user/deleteTask/{taskId}")
-    public ResponseEntity<?> deleteTask(@PathVariable int taskId,HttpServletRequest request){
+    public ResponseEntity<?> deleteTask(@PathVariable UUID taskId, HttpServletRequest request){
         // delete a task based on user id and track id, extract user id from claims
         // return 200 status if user is saved else 500 status
         Claims claims = (Claims) request.getAttribute("claims");
@@ -122,6 +125,23 @@ public class TaskController {
             responseEntity = new ResponseEntity<>(iTaskService.getAllUserTasksFromTaskList(id), HttpStatus.OK);
         } catch (Exception e) {
             responseEntity = new ResponseEntity<>("Failed to fetch Tasks!!", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        return responseEntity;
+    }
+
+    @GetMapping("/user/get-task/{taskId}")
+    public ResponseEntity<?> getATodo(@PathVariable UUID taskId, HttpServletRequest request) throws UserNotFoundException {
+        try {
+            System.out.println("header" + request.getHeader("Authorization"));
+            Claims claims = (Claims) request.getAttribute("claims");
+            System.out.println("id from claims :: " + claims.getSubject());
+            String id = claims.getSubject();
+            System.out.println("id :: "+id);
+            responseEntity = new ResponseEntity<>(iTaskService.retrieveSingleTodo(id, taskId), HttpStatus.OK);
+        } catch (UserNotFoundException e) {
+            throw new UserNotFoundException();
+        } catch (Exception e) {
+            responseEntity = new ResponseEntity<>("Cannot get a todo", HttpStatus.INTERNAL_SERVER_ERROR);
         }
         return responseEntity;
     }

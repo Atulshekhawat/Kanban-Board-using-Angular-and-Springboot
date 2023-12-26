@@ -1,39 +1,76 @@
-<div class="heading">
-    <h1>Welcome to KanBan Board </h1>
-    <button mat-raised-button color="primary" (click)="openDialog()">Add Task</button>
+<!-- <div class="heading">
+  <h1>Welcome to KanBan Board </h1>
+  <button mat-raised-button color="primary" (click)="openDialog()">Add Task</button>
 </div>
 <div class="kanban-dashboard">
-    <div class="column">
-      <h3>To Do</h3>
-      <hr>
-      <app-view-task></app-view-task>
-      <app-view-task></app-view-task>
-
+  <div class="column">
+    <h3>To Do</h3>
+    <hr>
+    <div cdkDropList #todoList="cdkDropList" [cdkDropListData]="todo" [cdkDropListConnectedTo]="[doneList]"
+      class="example-list" (cdkDropListDropped)="drop($event)">
+      <div class="example-box" cdkDrag><app-view-task></app-view-task></div>
     </div>
-  
-    <div class="column">
-      <h3>In Progress</h3>
-      <hr>
-      <!-- <div *ngFor="let task of tasks" [ngClass]="{'task-item': true, 'in-progress': task.status === 'inProgress'}">
-        {{ task.title }}
-      </div> -->
-      <app-view-task></app-view-task>
-    </div>
-  
-    <div class="column">
-      <h3>Completed</h3>
-      <hr>
-      <!-- <div *ngFor="let task of tasks" [ngClass]="{'task-item': true, 'done': task.status === 'done'}">
-        {{ task.title }}
-      </div> -->
-    </div>
-
-    <div class="column">
-        <h3>Back Log</h3>
-        <hr>
-        <!-- <div *ngFor="let task of tasks" [ngClass]="{'task-item': true, 'in-progress': task.status === 'inProgress'}">
-          {{ task.title }}
-        </div> -->
-        <app-view-task></app-view-task>
-      </div>
   </div>
+
+  <div class="column">
+    <h3>In Progress</h3>
+    <hr>
+  </div>
+
+  <div class="column">
+    <h3>Completed</h3>
+    <hr>
+
+  </div>
+
+  <div class="column">
+    <h3>Back Log</h3>
+    <hr>
+  </div>
+</div> -->
+
+<!-- -------------------------------------------------------------------------- -->
+
+
+<div class="heading">
+  <h1>Welcome to KanBan Board</h1>
+  <button mat-raised-button color="primary" (click)="openDialog()">Add Task</button>
+</div>
+
+<div class="kanban-dashboard">
+  <div class="column">
+    <h3>To Do</h3>
+    <hr>
+    <div cdkDropList #todoList="cdkDropList" [cdkDropListData]="todo" [cdkDropListConnectedTo]="[inProgressList, completedList, backLogList]"
+      class="example-list" (cdkDropListDropped)="drop($event)">
+      <div class="example-box"  cdkDrag>{{ todo }}</div>
+    </div>
+  </div>
+
+  <div class="column">
+    <h3>In Progress</h3>
+    <hr>
+    <div cdkDropList #inProgressList="cdkDropList" [cdkDropListConnectedTo]="[todoList, completedList, backLogList]"
+      class="example-list" (cdkDropListDropped)="drop($event)">
+      <div class="example-box" cdkDrag>{{ todo }}</div>
+    </div>
+  </div>
+
+  <div class="column">
+    <h3>Completed</h3>
+    <hr>
+    <div cdkDropList #completedList="cdkDropList"  [cdkDropListConnectedTo]="[todoList, inProgressList, backLogList]"
+      class="example-list" (cdkDropListDropped)="drop($event)">
+      <div class="example-box" *ngFor="let item of todo" cdkDrag>{{ todo }}</div>
+    </div>
+  </div>
+
+  <div class="column">
+    <h3>Back Log</h3>
+    <hr>
+    <div cdkDropList #backLogList="cdkDropList" [cdkDropListConnectedTo]="[todoList, inProgressList, completedList]"
+      class="example-list" (cdkDropListDropped)="drop($event)">
+      <div class="example-box" *ngFor="let item of todo" cdkDrag>{{ todo }}</div>
+    </div>
+  </div>
+</div>

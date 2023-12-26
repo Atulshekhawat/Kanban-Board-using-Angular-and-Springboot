@@ -12,10 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class ITaskServiceImpl implements ITaskService {
@@ -94,13 +91,13 @@ public class ITaskServiceImpl implements ITaskService {
         Iterator<Task> taskIterator = taskList.iterator();
         while (taskIterator.hasNext()) {
             Task task1 = taskIterator.next();
-            if (task1.getTaskId()==(task.getTaskId())) {
+            if (task1.getTaskId().equals(task.getTaskId())) {
                 if (task.getTaskName() != null)
                     task1.setTaskName(task.getTaskName());
                 if (task.getTaskDescription() != null)
                     task1.setTaskDescription(task.getTaskDescription());
-                if (task.getAssignee() != null)
-                    task1.setAssignee(task.getAssignee());
+                if (task.getAssignedTo() != null)
+                    task1.setAssignedTo(task.getAssignedTo());
                 if (task.getDueDate() != null)
                     task1.setDueDate(task.getDueDate());
                 if (task.getPriority() != null)
@@ -112,13 +109,14 @@ public class ITaskServiceImpl implements ITaskService {
         }
         if (!flag) {
             throw new TaskNotFoundException();
+//            System.out.println("This is the issue");
         }
         user.setTaskslist(taskList);
         return userTaskRepository.save(user);
     }
 
     @Override
-    public User deleteTask(String userId, int trackId) throws TaskNotFoundException, UserNotFoundException {
+    public User deleteTask(String userId, UUID trackId) throws TaskNotFoundException, UserNotFoundException {
         // delete the user details specified
         boolean userIdIsPresent = false;
         if(userTaskRepository.findById(userId).isEmpty()) {
@@ -142,6 +140,29 @@ public class ITaskServiceImpl implements ITaskService {
             throw new UserNotFoundException();
         }
         return userTaskRepository.findById(userEmail).get().getTaskslist();
+    }
 
+    @Override
+    public User retrieveSingleTodo(String userEmail, UUID taskId) throws UserNotFoundException,TaskNotFoundException {
+        if (userTaskRepository.findById(userEmail).isEmpty()) {
+            throw new UserNotFoundException();
+        }
+
+
+        User user = userTaskRepository.findById(userEmail).get();
+        List<Task> todoList = user.getTaskslist();
+
+        // Search for the todo with the specified todoID
+        Optional<Task> optionalTodo = todoList.stream()
+                .filter(todo -> todo.getTaskId().equals(taskId))
+                .findFirst();
+
+        if (optionalTodo.isEmpty()) {
+            throw new TaskNotFoundException();
+        }
+
+        // Assuming that your User class has a method to set the filtered TodoList
+        user.setTaskslist(Collections.singletonList(optionalTodo.get()));
+        return user;
     }
 }

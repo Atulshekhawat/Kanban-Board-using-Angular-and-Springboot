@@ -27,7 +27,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
 import { HttpIntercepterService } from './services/http-intercepter.service';
 import { EditTaskComponent } from './edit-task/edit-task.component';
-
+import {DragDropModule} from '@angular/cdk/drag-drop';
 @NgModule({
   declarations: [
     AppComponent,
@@ -58,6 +58,7 @@ import { EditTaskComponent } from './edit-task/edit-task.component';
     MatDatepickerModule,
     MatNativeDateModule,
     HttpClientModule,
+    DragDropModule,
     MatDialogModule
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: HttpIntercepterService, multi: true}],

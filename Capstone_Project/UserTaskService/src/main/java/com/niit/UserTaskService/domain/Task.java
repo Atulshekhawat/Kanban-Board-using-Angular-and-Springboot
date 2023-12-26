@@ -8,7 +8,7 @@ import java.util.UUID;
 public class Task {
 
    @Id
-   private UUID taskId = UUID.randomUUID();
+    private UUID taskId = UUID.randomUUID();
     private String taskName;
     private String taskDescription;
     private String assignedTo;
@@ -53,11 +53,11 @@ public class Task {
         this.taskDescription = taskDescription;
     }
 
-    public String getAssignee() {
+    public String getAssignedTo() {
         return assignedTo;
     }
 
-    public void setAssignee(String assignee) {
+    public void setAssignedTo(String assignedTo) {
         this.assignedTo = assignedTo;
     }
 

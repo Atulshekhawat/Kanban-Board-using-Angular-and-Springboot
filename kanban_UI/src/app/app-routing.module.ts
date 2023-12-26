@@ -6,6 +6,7 @@ import { UserRegisterComponent } from './user-register/user-register.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AuthGuard } from './services/auth.guard';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { EditTaskComponent } from './edit-task/edit-task.component';
 
 const routes: Routes = [
   {
@@ -19,6 +20,9 @@ const routes: Routes = [
   },
   {
     path:"dashboard",component:DashboardComponent
+  },
+  {
+    path:"edit-task/:id",component:EditTaskComponent
   },
   {
     path:"**",component:PageNotFoundComponent

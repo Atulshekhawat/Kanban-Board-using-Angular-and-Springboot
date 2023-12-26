@@ -41,15 +41,15 @@
           <mat-form-field>
             <mat-label>Status</mat-label>
             <select matNativeControl required [(ngModel)]="taskData.status" name="status">
-              <option value="To do">To Do</option>
+              <option value="To do">To do</option>
               <option value="In Progress">In Progress</option>
               <option value="Completed">Completed</option>
-              <option value="Backlog">BackLog</option>
+              <option value="Backlog">Backlog</option>
             </select>
           </mat-form-field>
           <button type="submit" mat-raised-button color="primary">Add Task</button>
           
-            <p>  {{taskData | json}}</p>  
+            <!-- <p>  {{taskData | json}}</p>   -->
     </form>
 
 </div>

@@ -1,46 +1,13 @@
-<!-- <div class="heading">
-  <h1>Welcome to KanBan Board </h1>
-  <button mat-raised-button color="primary" (click)="openDialog()">Add Task</button>
-</div>
-<div class="kanban-dashboard">
-  <div class="column">
-    <h3>To Do</h3>
-    <hr>
-    <div cdkDropList #todoList="cdkDropList" [cdkDropListData]="todo" [cdkDropListConnectedTo]="[doneList]"
-      class="example-list" (cdkDropListDropped)="drop($event)">
-      <div class="example-box" cdkDrag><app-view-task></app-view-task></div>
-    </div>
-  </div>
-
-  <div class="column">
-    <h3>In Progress</h3>
-    <hr>
-  </div>
-
-  <div class="column">
-    <h3>Completed</h3>
-    <hr>
-
-  </div>
-
-  <div class="column">
-    <h3>Back Log</h3>
-    <hr>
-  </div>
-</div> -->
-
-<!-- -------------------------------------------------------------------------- -->
-
 <div class="heading">
   <h1>Welcome to KanBan Board</h1>
   <button mat-raised-button color="primary" (click)="openDialog()">Add Task</button>
 </div>
 
 <div class="kanban-dashboard">
-  <div class="column">
+  <div class="column" (dragover)="onDragOver($event)" (drop)="onDrop($event,'To do')">
     <h3>To Do</h3>
     <hr>
-    <div class="task" *ngFor="let task of filterTasks('To do')" (dragstart)="onDragStart()">
+    <div class="task" draggable="true" *ngFor="let task of filterTasks('To do')" (dragstart)="onDragStart(task)">
       <mat-card>
         <mat-card-header>
           <mat-card-title>{{task.taskName}}</mat-card-title>
@@ -63,10 +30,10 @@
     </div>
   </div>
 
-  <div class="column">
+  <div class="column" (dragover)="onDragOver($event)" (drop)="onDrop($event,'In Progress')">
     <h3>In Progress</h3>
     <hr>
-    <div class="task" *ngFor="let task of filterTasks('In Progress')">
+    <div class="task" draggable="true" *ngFor="let task of filterTasks('In Progress')" (dragstart)="onDragStart(task)">
       <mat-card>
         <mat-card-header>
           <mat-card-title>{{task.taskName}}</mat-card-title>
@@ -89,10 +56,10 @@
     </div>
   </div>
 
-  <div class="column">
+  <div class="column" (dragover)="onDragOver($event)" (drop)="onDrop($event,'Completed')" >
     <h3>Completed</h3>
     <hr>
-    <div class="task" *ngFor="let task of filterTasks('Completed')">
+    <div class="task" draggable="true" *ngFor="let task of filterTasks('Completed')" (dragstart)="onDragStart(task)">
       <mat-card>
         <mat-card-header>
           <mat-card-title>{{task.taskName}}</mat-card-title>
@@ -115,10 +82,10 @@
     </div>
   </div>
 
-  <div class="column">
+  <div class="column" (dragover)="onDragOver($event)" (drop)="onDrop($event,'Backlog')">
     <h3>Back Log</h3>
     <hr>
-    <div class="task" *ngFor="let task of filterTasks('Backlog')">
+    <div class="task" draggable="true" *ngFor="let task of filterTasks('Backlog')" (dragstart)="onDragStart(task)">
      <mat-card>
         <mat-card-header>
           <mat-card-title>{{task.taskName}}</mat-card-title>
@@ -133,7 +100,7 @@
         <mat-card-footer>
             <hr>
             <div>
-                <button routerLink="/edit-task/{{task.taskId}}" mat-button (click)="openDialog()" color="primary">Edit</button>
+                <button routerLink="/edit-task/{{task.taskId}}" mat-button color="primary">Edit</button>
                 <button mat-button (click)="deleteTask(task.taskId)" color="accent">Delete</button>
             </div>
         </mat-card-footer>

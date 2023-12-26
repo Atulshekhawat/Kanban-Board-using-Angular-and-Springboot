@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { TaskService } from '../services/task.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-task',
@@ -12,7 +13,7 @@ onSubmit(_t7: NgForm) {
 throw new Error('Method not implemented.');
 }
 
-constructor(private TaskService:TaskService) {}
+constructor(private TaskService:TaskService, private router:Router) {}
 
 // public taskData={
 //   taskName:'',
@@ -29,6 +30,7 @@ addTask(){
     resp =>{
       console.log(resp);
       alert("Task Added Successfully");
+      this.router.navigate(['dashboard']);
     }
   )
 }

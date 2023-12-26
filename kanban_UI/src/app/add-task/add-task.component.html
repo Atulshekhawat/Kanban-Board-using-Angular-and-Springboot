@@ -47,7 +47,7 @@
               <option value="Backlog">Backlog</option>
             </select>
           </mat-form-field>
-          <button type="submit" mat-raised-button color="primary">Add Task</button>
+          <button type="submit" [mat-dialog-close]="true" mat-raised-button color="primary">Add Task</button>
           
             <!-- <p>  {{taskData | json}}</p>   -->
     </form>

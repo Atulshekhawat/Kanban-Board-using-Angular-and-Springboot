@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { AddTaskComponent } from '../add-task/add-task.component';
 import { CdkDragDrop, CdkDropList, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { TaskService } from '../services/task.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,10 +10,50 @@ import { CdkDragDrop, CdkDropList, moveItemInArray, transferArrayItem } from '@a
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent {
-doneList: any;
+  data: Array<any> = [];
 
-constructor(public dialog: MatDialog){}
+constructor(public dialog: MatDialog,private userData:TaskService){}
 
+ngOnInit(){
+  // this.userData.viewTask().subscribe((data:any) => {
+  //   this.data=data;
+  //   console.log(data);
+  // });
+  this.refreshTask();
+}
+
+refreshTask(){
+  this.userData.viewTask().subscribe((data:any) => {
+    this.data=data;
+    console.log(data);
+  });
+}
+
+// filter the task data (By status)
+filterTasks(status: string){
+  return this.data?.filter(m=>m.status==status);
+
+}
+
+deleteTask(id:any){
+  this.userData.deleteTask(id).subscribe((resp)=>{
+    console.log(resp);
+    this.refreshTask();
+  },
+  (err)=>{
+    console.log(err);
+  }
+  )
+}
+
+onDragStart(){
+
+}
+
+
+
+// ---------------------------------------------------------------//
+// This is for Dialog
 openDialog() {
   const dialogRef = this.dialog.open(AddTaskComponent);
 
@@ -20,20 +61,12 @@ openDialog() {
     console.log(`Dialog result: ${result}`);
   });
 }
-todo = ['Get to work', 'Pick up groceries', 'Go home', 'Fall asleep'];
 
-done = ['Get up', 'Brush teeth', 'Take a shower', 'Check e-mail', 'Walk dog'];
 
-drop(event: CdkDragDrop<string[]>) {
-  if (event.previousContainer === event.container) {
-    moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-  } else {
-    transferArrayItem(
-      event.previousContainer.data,
-      event.container.data,
-      event.previousIndex,
-      event.currentIndex,
-    );
-  }
-}
+
+
+
+
+
+
 }

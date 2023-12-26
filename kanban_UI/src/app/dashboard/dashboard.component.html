@@ -31,7 +31,6 @@
 
 <!-- -------------------------------------------------------------------------- -->
 
-
 <div class="heading">
   <h1>Welcome to KanBan Board</h1>
   <button mat-raised-button color="primary" (click)="openDialog()">Add Task</button>
@@ -41,36 +40,104 @@
   <div class="column">
     <h3>To Do</h3>
     <hr>
-    <div cdkDropList #todoList="cdkDropList" [cdkDropListData]="todo" [cdkDropListConnectedTo]="[inProgressList, completedList, backLogList]"
-      class="example-list" (cdkDropListDropped)="drop($event)">
-      <div class="example-box"  cdkDrag>{{ todo }}</div>
+    <div class="task" *ngFor="let task of filterTasks('To do')" (dragstart)="onDragStart()">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>{{task.taskName}}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p>Task Description: {{task.taskDescription}}</p>
+          <p>Task Assigned To: {{task.assignedTo}}</p>
+          <p>Due Date: {{task.dueDate}}</p>
+          <p>Priority : {{task.priority}}</p>
+          <p>Status: {{task.status}}</p>
+        </mat-card-content>
+        <mat-card-footer>
+            <hr>
+            <div>
+                <button routerLink="/edit-task/{{task.taskId}}" mat-button (click)="openDialog()" color="primary">Edit</button>
+                <button mat-button (click)="deleteTask(task.taskId)" color="accent">Delete</button>
+            </div>
+        </mat-card-footer>
+    </mat-card>
     </div>
   </div>
 
   <div class="column">
     <h3>In Progress</h3>
     <hr>
-    <div cdkDropList #inProgressList="cdkDropList" [cdkDropListConnectedTo]="[todoList, completedList, backLogList]"
-      class="example-list" (cdkDropListDropped)="drop($event)">
-      <div class="example-box" cdkDrag>{{ todo }}</div>
+    <div class="task" *ngFor="let task of filterTasks('In Progress')">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>{{task.taskName}}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p>Task Description: {{task.taskDescription}}</p>
+          <p>Task Assigned To: {{task.assignedTo}}</p>
+          <p>Due Date: {{task.dueDate}}</p>
+          <p>Priority : {{task.priority}}</p>
+          <p>Status: {{task.status}}</p>
+        </mat-card-content>
+        <mat-card-footer>
+            <hr>
+            <div>
+                <button routerLink="/edit-task/{{task.taskId}}" mat-button (click)="openDialog()" color="primary">Edit</button>
+                <button mat-button (click)="deleteTask(task.taskId)" color="accent">Delete</button>
+            </div>
+        </mat-card-footer>
+    </mat-card>
     </div>
   </div>
 
   <div class="column">
     <h3>Completed</h3>
     <hr>
-    <div cdkDropList #completedList="cdkDropList"  [cdkDropListConnectedTo]="[todoList, inProgressList, backLogList]"
-      class="example-list" (cdkDropListDropped)="drop($event)">
-      <div class="example-box" *ngFor="let item of todo" cdkDrag>{{ todo }}</div>
+    <div class="task" *ngFor="let task of filterTasks('Completed')">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>{{task.taskName}}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p>Task Description: {{task.taskDescription}}</p>
+          <p>Task Assigned To: {{task.assignedTo}}</p>
+          <p>Due Date: {{task.dueDate}}</p>
+          <p>Priority : {{task.priority}}</p>
+          <p>Status: {{task.status}}</p>
+        </mat-card-content>
+        <mat-card-footer>
+            <hr>
+            <div>
+                <button routerLink="/edit-task/{{task.taskId}}" mat-button (click)="openDialog()" color="primary">Edit</button>
+                <button mat-button (click)="deleteTask(task.taskId)" color="accent">Delete</button>
+            </div>
+        </mat-card-footer>
+    </mat-card>
     </div>
   </div>
 
   <div class="column">
     <h3>Back Log</h3>
     <hr>
-    <div cdkDropList #backLogList="cdkDropList" [cdkDropListConnectedTo]="[todoList, inProgressList, completedList]"
-      class="example-list" (cdkDropListDropped)="drop($event)">
-      <div class="example-box" *ngFor="let item of todo" cdkDrag>{{ todo }}</div>
+    <div class="task" *ngFor="let task of filterTasks('Backlog')">
+     <mat-card>
+        <mat-card-header>
+          <mat-card-title>{{task.taskName}}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p>Task Description: {{task.taskDescription}}</p>
+          <p>Task Assigned To: {{task.assignedTo}}</p>
+          <p>Due Date: {{task.dueDate}}</p>
+          <p>Priority : {{task.priority}}</p>
+          <p>Status: {{task.status}}</p>
+        </mat-card-content>
+        <mat-card-footer>
+            <hr>
+            <div>
+                <button routerLink="/edit-task/{{task.taskId}}" mat-button (click)="openDialog()" color="primary">Edit</button>
+                <button mat-button (click)="deleteTask(task.taskId)" color="accent">Delete</button>
+            </div>
+        </mat-card-footer>
+    </mat-card>
     </div>
   </div>
 </div>

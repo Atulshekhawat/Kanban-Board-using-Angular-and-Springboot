@@ -22,7 +22,6 @@ import { MatDialogModule} from '@angular/material/dialog';
 import {MatCardModule} from '@angular/material/card';
 import {MatSelectModule} from '@angular/material/select';
 import {MatMenuModule} from '@angular/material/menu';
-import { ViewTaskComponent } from './view-task/view-task.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
 import { HttpIntercepterService } from './services/http-intercepter.service';
@@ -39,7 +38,6 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     HeroSectionComponent,
     DashboardComponent,
     AddTaskComponent,
-    ViewTaskComponent,
     EditTaskComponent,
   ],
   imports: [

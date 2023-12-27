@@ -23,6 +23,7 @@ export class UserLoginComponent {
         (resp:any) => {
           console.log(resp);
           this.loginService.loginUser(resp)
+          sessionStorage.setItem('userEmail',this.credentials.userEmail);
           window.location.href="/dashboard"
         }
       )

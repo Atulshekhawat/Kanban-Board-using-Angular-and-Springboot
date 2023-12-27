@@ -165,4 +165,12 @@ public class ITaskServiceImpl implements ITaskService {
         user.setTaskslist(Collections.singletonList(optionalTodo.get()));
         return user;
     }
+
+    @Override
+    public String getUserName(String userEmail) throws UserNotFoundException {
+        if (userTaskRepository.findById(userEmail).isEmpty()) {
+            throw new UserNotFoundException();
+        }
+        return userTaskRepository.findById(userEmail).get().getUserName();
+    }
 }

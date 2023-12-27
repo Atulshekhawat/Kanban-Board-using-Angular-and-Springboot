@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.UUID;
 
 @RestController
-@CrossOrigin(origins = "*")
 @RequestMapping("/api/v1")
 
 public class TaskController {
@@ -142,6 +141,23 @@ public class TaskController {
             throw new UserNotFoundException();
         } catch (Exception e) {
             responseEntity = new ResponseEntity<>("Cannot get a todo", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        return responseEntity;
+    }
+
+    @GetMapping("/user/getUsername")
+    public ResponseEntity<?> getUsername(HttpServletRequest request) throws UserNotFoundException {
+        try {
+            System.out.println("header" + request.getHeader("Authorization"));
+            Claims claims = (Claims) request.getAttribute("claims");
+            System.out.println("id from claims :: " + claims.getSubject());
+            String id = claims.getSubject();
+            System.out.println("id :: "+id);
+            responseEntity = new ResponseEntity<>(iTaskService.getUserName(id), HttpStatus.OK);
+        } catch (UserNotFoundException e) {
+            throw new UserNotFoundException();
+        } catch (Exception e) {
+            responseEntity = new ResponseEntity<>("Cannot get Username", HttpStatus.INTERNAL_SERVER_ERROR);
         }
         return responseEntity;
     }

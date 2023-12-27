@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { TaskService } from '../services/task.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-edit-task',
@@ -11,7 +11,7 @@ export class EditTaskComponent {
   minDate: Date = new Date();
   taskData:any={};
 
-  constructor(private taskService:TaskService,private activatedRoute: ActivatedRoute) {}
+  constructor(private taskService:TaskService,private activatedRoute: ActivatedRoute, private router:Router) {}
 
 
   ngOnInit() {
@@ -32,6 +32,7 @@ export class EditTaskComponent {
       (resp)=>{
         this.taskData=resp;
         console.log(resp);
+        this.router.navigate(['dashboard']);
     })
   }
 }

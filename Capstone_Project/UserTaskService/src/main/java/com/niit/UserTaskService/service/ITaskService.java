@@ -19,5 +19,5 @@ public interface ITaskService {
     User deleteTask(String userEmail, UUID taskId) throws TaskNotFoundException, UserNotFoundException;
     List<Task> getAllUserTasksFromTaskList(String userEmail) throws Exception;
     User retrieveSingleTodo(String userEmail, UUID taskId) throws UserNotFoundException, TaskNotFoundException;
-
+    String getUserName(String userEmail) throws UserNotFoundException;
 }

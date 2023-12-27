@@ -63,7 +63,7 @@
         <span *ngIf="status.errors?.['required']">Status is required</span>
       </mat-error>
     </mat-form-field>
-    <button type="submit" mat-raised-button color="primary" [disabled]="addTaskForm.invalid">Add Task</button>
+    <button type="submit" mat-raised-button color="primary" [mat-dialog-close]="true"  [disabled]="addTaskForm.invalid">Add Task</button>
 
     <!-- <p>  {{taskData | json}}</p>   -->
   </form>

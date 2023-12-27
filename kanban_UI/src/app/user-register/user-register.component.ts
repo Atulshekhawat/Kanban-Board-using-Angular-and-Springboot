@@ -17,11 +17,18 @@ export class UserRegisterComponent {
     taskslist:null
   }
   register(){
-
     this.UserServiceService.register(this.userData).subscribe(
       res => {
         console.log(res);
         alert("User Register Successfully");
+        let mailBody={
+          recipient:this.userData.userEmail ,
+          msgBody:"Thankyou For Register Kanban Board Service" ,
+          subject: 'Register Successfully'
+        } 
+        this.UserServiceService.sendMail(mailBody).subscribe((resp)=>{
+          console.log(resp);
+        });
       }
     );
 

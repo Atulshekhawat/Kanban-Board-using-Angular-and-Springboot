@@ -1,6 +1,7 @@
 package com.niit.MailService.Controller;
 
-import com.niit.MailService.Model.MailStructure;
+
+import com.niit.MailService.Model.EmailDetails;
 import com.niit.MailService.Service.MailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -10,14 +11,10 @@ import org.springframework.web.bind.annotation.*;
 public class MailController {
 
     @Autowired
-    private MailService mailService;
-
-
-    @PostMapping("/send/{mail}")
-    public String sendMail(@PathVariable String mail, @RequestBody MailStructure mailStructure){
-
-        mailService.sendMail(mail,mailStructure);
-        return "Successfully sent the mail !!";
+    MailService emailService;
+    @PostMapping("/sendEmail")
+    public String sendMail(@RequestBody EmailDetails emailDetails) {
+        return emailService.sendEmail(emailDetails);
     }
 
 }

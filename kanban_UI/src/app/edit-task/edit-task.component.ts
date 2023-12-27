@@ -8,18 +8,12 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./edit-task.component.css']
 })
 export class EditTaskComponent {
+  minDate: Date = new Date();
+  taskData:any={};
 
   constructor(private taskService:TaskService,private activatedRoute: ActivatedRoute) {}
 
-//   public taskData={
-//   taskName:'',
-//   taskDescription:'',
-//   assignedTo:'',
-//   dueDate:'',
-//   priority:'',
-//   status:''
-// }
-  taskData:any={};
+
   ngOnInit() {
     this.activatedRoute.paramMap.subscribe(params => {
       let taskId = params.get("id") ?? 0;

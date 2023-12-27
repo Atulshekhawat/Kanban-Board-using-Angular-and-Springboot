@@ -26,7 +26,10 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
 import { HttpIntercepterService } from './services/http-intercepter.service';
 import { EditTaskComponent } from './edit-task/edit-task.component';
+import {MatRadioModule} from '@angular/material/radio';
 import {DragDropModule} from '@angular/cdk/drag-drop';
+import { AboutUsComponent } from './about-us/about-us.component';
+import { ContactUsComponent } from './contact-us/contact-us.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,6 +42,8 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     DashboardComponent,
     AddTaskComponent,
     EditTaskComponent,
+    AboutUsComponent,
+    ContactUsComponent,
   ],
   imports: [
     BrowserModule,
@@ -50,6 +55,7 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     MatToolbarModule,
     MatFormFieldModule,
     MatCardModule,
+    MatRadioModule,
     FormsModule,
     MatSelectModule,
     MatMenuModule,

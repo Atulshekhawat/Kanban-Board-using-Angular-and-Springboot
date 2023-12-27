@@ -14,16 +14,11 @@ throw new Error('Method not implemented.');
 }
 
 constructor(private TaskService:TaskService, private router:Router) {}
-
-// public taskData={
-//   taskName:'',
-//   taskDescription:'',
-//   assignedTo:'',
-//   dueDate:'',
-//   priority:'',
-//   status:''
-// }
 taskData:any={};
+minDate: Date = new Date();
+
+
+
 
 addTask(){
   this.TaskService.addTask(this.taskData).subscribe(

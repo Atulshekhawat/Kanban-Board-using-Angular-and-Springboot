@@ -1,7 +1,7 @@
 .kanban-dashboard {
   display: flex;
   justify-content: space-around;
-  height: 610px;
+  height: 634px;
 }
 
 .heading{
@@ -31,6 +31,15 @@ h3 {
   font-size: large;
   margin: 3%;
   text-align: center;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+hr{
+  position: sticky;
+  top: 10px;
+  z-index: 1;
 }
 .task-item {
   padding: 5px;

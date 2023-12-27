@@ -1,0 +1,56 @@
+.text-container{
+    width: 80%;
+    margin: 1% auto;
+    padding: 1%;
+    /* height: 460px; */
+}
+
+img{
+    /* border-radius: 30px; */
+    margin: 1% 2.5%;
+    width: 95%;
+}
+
+.heading{
+    font-size: xx-large;
+    font-weight: bolder;
+    text-align: center;
+    margin: 20px 0;
+}
+
+span{
+    color: #165be4;
+}
+
+/* _---------------------------__-------------------------------- */
+
+.team-container{
+
+    border-radius: 30px;
+    height: 630px;
+    padding-top: 20px;
+}
+.card-container{
+    display: flex;
+}
+
+
+.team-card{
+    width: 340px;
+    height: 500px;
+    margin: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .team-card img {
+    width: 80%;
+    height: auto;
+    margin: 4% 12%;
+    border-bottom: 1px solid #ccc;
+  }
+
+.member-details{
+    text-align: center;
+}

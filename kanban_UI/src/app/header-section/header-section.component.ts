@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { LoginService } from '../services/login.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-header-section',
@@ -19,5 +20,6 @@ export class HeaderSectionComponent {
   logoutUser(){
     this.loginService.logout();
     location.reload();
+    
   }
 }

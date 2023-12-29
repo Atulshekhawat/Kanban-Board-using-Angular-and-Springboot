@@ -1,7 +1,8 @@
 .text-container{
     width: 80%;
-    margin: 1% auto;
-    padding: 1%;
+    margin: 0 8%;
+    margin-bottom: 20%;
+    padding: 3%;
     /* height: 460px; */
 }
 
@@ -9,6 +10,13 @@ img{
     /* border-radius: 30px; */
     margin: 1% 2.5%;
     width: 95%;
+}
+
+.text-heading{
+    font-size: x-large;
+    font-weight: bolder;
+    text-align: center;
+    
 }
 
 .heading{
@@ -25,10 +33,13 @@ span{
 /* _---------------------------__-------------------------------- */
 
 .team-container{
-
+    border: 1px solid black;
     border-radius: 30px;
     height: 630px;
     padding-top: 20px;
+    background-color: rgb(70, 146, 246);
+    padding-left: 3%;
+    
 }
 .card-container{
     display: flex;
@@ -49,6 +60,7 @@ span{
     height: auto;
     margin: 4% 12%;
     border-bottom: 1px solid #ccc;
+    border-radius: 2%;
   }
 
 .member-details{

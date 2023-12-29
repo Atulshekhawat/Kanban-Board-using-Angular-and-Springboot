@@ -50,19 +50,16 @@
         Priority is required
       </mat-error>
     </mat-form-field>
-    <mat-form-field>
+    <!-- <mat-form-field>
       <mat-label>Status</mat-label>
-      <select matNativeControl required name="status" [(ngModel)]="taskData.status" #status="ngModel">
-        <option value="" disabled selected>Select Status</option>
+      <select matNativeControl [(value)]="selected" required  name="status" [(ngModel)]="taskData.status" #status="ngModel">
         <option value="To do">To do</option>
-        <!-- <option value="In Progress">In Progress</option>
-        <option value="Completed">Completed</option>
-        <option value="Backlog">Backlog</option> -->
+
       </select>
       <mat-error *ngIf="status.invalid && (status.dirty || status.touched)">
         <span *ngIf="status.errors?.['required']">Status is required</span>
       </mat-error>
-    </mat-form-field>
+    </mat-form-field> -->
     <button type="submit" mat-raised-button color="primary" [mat-dialog-close]="true"  [disabled]="addTaskForm.invalid">Add Task</button>
 
     <!-- <p>  {{taskData | json}}</p>   -->

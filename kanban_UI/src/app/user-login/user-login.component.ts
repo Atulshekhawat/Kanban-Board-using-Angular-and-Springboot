@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { LoginService } from '../services/login.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-user-login',
@@ -12,7 +13,7 @@ export class UserLoginComponent {
     password:''
   }
 
-  constructor(private loginService:LoginService){}
+  constructor(private loginService:LoginService, private toastr:ToastrService){}
   
 
   onSubmit(){
@@ -21,15 +22,19 @@ export class UserLoginComponent {
       // token generate
       this.loginService.generateToken(this.credentials).subscribe(
         (resp:any) => {
-          console.log(resp);
+          // console.log(resp);
+          this.toastr.success("Login Successfull")
           this.loginService.loginUser(resp)
           sessionStorage.setItem('userEmail',this.credentials.userEmail);
           window.location.href="/dashboard"
+        },
+        (err)=>{
+          this.toastr.error("Invalid Crediential");
         }
       )
 
     }else{
-      alert("Fields can't be empty");
+      this.toastr.error("Fields can't be empty")
     }
   }
 }

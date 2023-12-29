@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { UserServiceService } from '../services/user-service.service';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-register',
@@ -9,28 +11,45 @@ import { UserServiceService } from '../services/user-service.service';
 export class UserRegisterComponent {
   
 
-  constructor(private UserServiceService:UserServiceService){}
+  constructor(private UserServiceService:UserServiceService,private toaster:ToastrService,private route:Router){}
   public userData  ={
     userEmail:"",
     userName:"",
     password:"",
     taskslist:null
   }
+
   register(){
+    if(( this.userData.userName!='' && this.userData.userEmail !='' && this.userData.password !='') && (this.userData.userName!=null && this.userData.userEmail!=null && this.userData.password!=null)){
     this.UserServiceService.register(this.userData).subscribe(
-      res => {
+      (res) => {
+        
         console.log(res);
-        alert("User Register Successfully");
-        let mailBody={
-          recipient:this.userData.userEmail ,
-          msgBody:"Thankyou For Register Kanban Board Service" ,
-          subject: 'Register Successfully'
-        } 
+        this.toaster.success("Register Successfully");
+        this.route.navigate(['']);
+        let mailBody = {
+          recipient: this.userData.userEmail,
+          msgBody: `
+          Dear ${this.userData.userName},
+                  
+          Thank you for registering with our Kanban Board Service! Your registration was successful. You can now log in to your account and start managing your projects efficiently.
+                  
+          Best regards,
+          Atul Singh
+          KanBan Board Service
+          `,
+          subject: 'Register Successfully Team: KanBan Board'
+        };
         this.UserServiceService.sendMail(mailBody).subscribe((resp)=>{
           console.log(resp);
         });
+      },
+      (err)=>{
+        this.toaster.error("User Already Exist");
       }
-    );
-
+  );
+    }else{
+      this.toaster.error("Fields cannot be empty");
+    }
   }
 }

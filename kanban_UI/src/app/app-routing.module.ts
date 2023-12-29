@@ -8,7 +8,6 @@ import { AuthGuard } from './services/auth.guard';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { EditTaskComponent } from './edit-task/edit-task.component';
 import { AboutUsComponent } from './about-us/about-us.component';
-import { ContactUsComponent } from './contact-us/contact-us.component';
 
 const routes: Routes = [
   {
@@ -16,9 +15,6 @@ const routes: Routes = [
   },
   {
     path:"about-us",component:AboutUsComponent
-  },
-  {
-    path:"contact-us",component:ContactUsComponent
   },
   {
     path:"login",component:UserLoginComponent

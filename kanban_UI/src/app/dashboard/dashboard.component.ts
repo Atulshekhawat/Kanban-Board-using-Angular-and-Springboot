@@ -4,6 +4,7 @@ import { AddTaskComponent } from '../add-task/add-task.component';
 import { TaskService } from '../services/task.service';
 import { UserRegisterComponent } from '../user-register/user-register.component';
 import { UserServiceService } from '../services/user-service.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-dashboard',
@@ -14,7 +15,7 @@ export class DashboardComponent {
   data: Array<any> = [];
   currentTask: any;
   userName='';
-  constructor(public dialog: MatDialog, private userData: TaskService,private userService:UserServiceService) {}
+  constructor(public dialog: MatDialog, private taskservice: TaskService,private userService:UserServiceService,private toastr:ToastrService) {}
 
   ngOnInit() {
     // this.userData.viewTask().subscribe((data:any) => {
@@ -43,14 +44,17 @@ export class DashboardComponent {
   }
 
   refreshTask() {
-    this.userData.viewTask().subscribe((data: any) => {
+    this.taskservice.viewTask().subscribe((data: any) => {
       this.data = data;
       console.log(data);
     });
   }
+
+column:string=''
   // Count Number of tasks
   getTasksCount(column: string): number {
-    return this.filterTasks(column).length;
+    const filteredTasks = this.filterTasks(column);
+    return filteredTasks ? filteredTasks.length : 0;
   }
 
   // filter the task data (By status)
@@ -59,14 +63,15 @@ export class DashboardComponent {
   }
 
   deleteTask(id: any) {
-    this.userData.deleteTask(id).subscribe(
+    this.taskservice.deleteTask(id).subscribe(
       (resp) => {
-        console.log(resp);
-        alert("Are You sure ")
+        // console.log(resp);
+        this.toastr.success("Task Deleted Successfully");
         this.refreshTask();
       },
       (err) => {
-        console.log(err);
+        // console.log(err);
+        this.toastr.error("Something Went Wrong");
       }
     );
   }
@@ -88,9 +93,10 @@ export class DashboardComponent {
     const updatedStatus = this.data.find((m) => m.taskId == this.currentTask.taskId);
     if (updatedStatus != undefined) {
       updatedStatus.status = status;
-      this.userData.updateTask(updatedStatus).subscribe(
+      this.taskservice.updateTask(updatedStatus).subscribe(
         (response) => {
-          console.log('Status updated successfully', response);
+          // console.log('Status updated successfully', response);
+          this.toastr.success("Tasked Moved Successfully");
       }
     )}
     // this.currentTask = null;

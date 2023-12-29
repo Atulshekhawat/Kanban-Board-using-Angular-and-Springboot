@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { TaskService } from '../services/task.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-edit-task',
@@ -11,7 +12,7 @@ export class EditTaskComponent {
   minDate: Date = new Date();
   taskData:any={};
 
-  constructor(private taskService:TaskService,private activatedRoute: ActivatedRoute, private router:Router) {}
+  constructor(private taskService:TaskService,private activatedRoute: ActivatedRoute, private router:Router,private toastr:ToastrService) {}
 
 
   ngOnInit() {
@@ -31,8 +32,12 @@ export class EditTaskComponent {
     this.taskService.updateTask(this.taskData).subscribe(
       (resp)=>{
         this.taskData=resp;
-        console.log(resp);
+        this.toastr.success("Task Updated Successfully");
         this.router.navigate(['dashboard']);
-    })
+    },
+    (err)=>{
+      this.toastr.error("Task Not Updated Something Went Wrong");
+    }
+    )
   }
 }

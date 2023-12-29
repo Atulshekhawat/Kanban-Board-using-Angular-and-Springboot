@@ -29,7 +29,8 @@ import { EditTaskComponent } from './edit-task/edit-task.component';
 import {MatRadioModule} from '@angular/material/radio';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import { AboutUsComponent } from './about-us/about-us.component';
-import { ContactUsComponent } from './contact-us/contact-us.component';
+import { CommonModule } from '@angular/common';
+import { ToastrModule } from 'ngx-toastr';
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,8 +43,7 @@ import { ContactUsComponent } from './contact-us/contact-us.component';
     DashboardComponent,
     AddTaskComponent,
     EditTaskComponent,
-    AboutUsComponent,
-    ContactUsComponent,
+    AboutUsComponent
   ],
   imports: [
     BrowserModule,
@@ -63,7 +63,9 @@ import { ContactUsComponent } from './contact-us/contact-us.component';
     MatNativeDateModule,
     HttpClientModule,
     DragDropModule,
-    MatDialogModule
+    MatDialogModule,
+    CommonModule,
+    ToastrModule.forRoot()
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: HttpIntercepterService, multi: true}],
   bootstrap: [AppComponent]

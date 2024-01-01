@@ -16,15 +16,15 @@
         <mat-card-content>
           <p>Task Description: {{task.taskDescription}}</p>
           <p>Task Assigned To: {{task.assignedTo}}</p>
-          <p>Due Date: {{task.dueDate}}</p>
+          <p>Due Date: {{task.dueDate | date}}</p>
           <p>Priority : {{task.priority}}</p>
           <p>Status: {{task.status}}</p>
         </mat-card-content>
         <mat-card-footer>
             <hr>
             <div>
-                <button routerLink="/edit-task/{{task.taskId}}" mat-button color="primary">Edit</button>
-                <button mat-button (click)="deleteTask(task.taskId)" color="accent">Delete</button>
+                <button routerLink="/edit-task/{{task.taskId}}" mat-button >Edit</button>
+                <button mat-button (click)="deleteTask(task.taskId)" >Delete</button>
             </div>
         </mat-card-footer>
     </mat-card>
@@ -43,15 +43,15 @@
         <mat-card-content>
           <p>Task Description: {{task.taskDescription}}</p>
           <p>Task Assigned To: {{task.assignedTo}}</p>
-          <p>Due Date: {{task.dueDate}}</p>
+          <p>Due Date: {{task.dueDate | date}}</p>
           <p>Priority : {{task.priority}}</p>
           <p>Status: {{task.status}}</p>
         </mat-card-content>
         <mat-card-footer>
             <hr>
             <div>
-                <button routerLink="/edit-task/{{task.taskId}}" mat-button color="primary">Edit</button>
-                <button mat-button (click)="deleteTask(task.taskId)" color="accent">Delete</button>
+                <button routerLink="/edit-task/{{task.taskId}}" mat-button >Edit</button>
+                <button mat-button (click)="deleteTask(task.taskId)" >Delete</button>
             </div>
         </mat-card-footer>
     </mat-card>
@@ -70,15 +70,15 @@
         <mat-card-content>
           <p>Task Description: {{task.taskDescription}}</p>
           <p>Task Assigned To: {{task.assignedTo}}</p>
-          <p>Due Date: {{task.dueDate}}</p>
+          <p>Due Date: {{task.dueDate | date}}</p>
           <p>Priority : {{task.priority}}</p>
           <p>Status: {{task.status}}</p>
         </mat-card-content>
         <mat-card-footer>
             <hr>
             <div>
-                <button routerLink="/edit-task/{{task.taskId}}" mat-button color="primary">Edit</button>
-                <button mat-button (click)="deleteTask(task.taskId)" color="accent">Delete</button>
+                <button routerLink="/edit-task/{{task.taskId}}" mat-button >Edit</button>
+                <button mat-button (click)="deleteTask(task.taskId)">Delete</button>
             </div>
         </mat-card-footer>
     </mat-card>
@@ -97,15 +97,15 @@
         <mat-card-content>
           <p>Task Description: {{task.taskDescription}}</p>
           <p>Task Assigned To: {{task.assignedTo}}</p>
-          <p>Due Date: {{task.dueDate}}</p>
+          <p>Due Date: {{task.dueDate | date}}</p>
           <p>Priority : {{task.priority}}</p>
           <p>Status: {{task.status}}</p>
         </mat-card-content>
         <mat-card-footer>
             <hr>
             <div>
-                <button routerLink="/edit-task/{{task.taskId}}" mat-button color="primary">Edit</button>
-                <button mat-button (click)="deleteTask(task.taskId)" color="accent">Delete</button>
+                <button routerLink="/edit-task/{{task.taskId}}" mat-button >Edit</button>
+                <button mat-button (click)="deleteTask(task.taskId)" >Delete</button>
             </div>
         </mat-card-footer>
     </mat-card>

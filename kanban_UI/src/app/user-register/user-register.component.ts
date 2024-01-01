@@ -30,7 +30,7 @@ export class UserRegisterComponent {
         let mailBody = {
           recipient: this.userData.userEmail,
           msgBody: `
-          Dear ${this.userData.userName},
+          Dear User,
                   
           Thank you for registering with our Kanban Board Service! Your registration was successful. You can now log in to your account and start managing your projects efficiently.
                   

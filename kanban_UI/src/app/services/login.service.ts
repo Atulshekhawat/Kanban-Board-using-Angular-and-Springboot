@@ -42,7 +42,7 @@ export class LoginService {
   }
 
   // for getting the token
-  getTocken(){
+  getToken(){
     return localStorage.getItem('token');
   }
 

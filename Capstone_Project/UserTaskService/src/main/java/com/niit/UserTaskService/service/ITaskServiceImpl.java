@@ -143,26 +143,26 @@ public class ITaskServiceImpl implements ITaskService {
     }
 
     @Override
-    public User retrieveSingleTodo(String userEmail, UUID taskId) throws UserNotFoundException,TaskNotFoundException {
+    public User retrieveSingleTask(String userEmail, UUID taskId) throws UserNotFoundException,TaskNotFoundException {
         if (userTaskRepository.findById(userEmail).isEmpty()) {
             throw new UserNotFoundException();
         }
 
 
         User user = userTaskRepository.findById(userEmail).get();
-        List<Task> todoList = user.getTaskslist();
+        List<Task> taskList = user.getTaskslist();
 
-        // Search for the todo with the specified todoID
-        Optional<Task> optionalTodo = todoList.stream()
-                .filter(todo -> todo.getTaskId().equals(taskId))
+        // Search for the task with the specified taskId
+        Optional<Task> optionalTask = taskList.stream()
+                .filter(task -> task.getTaskId().equals(taskId))
                 .findFirst();
 
-        if (optionalTodo.isEmpty()) {
+        if (optionalTask.isEmpty()) {
             throw new TaskNotFoundException();
         }
 
-        // Assuming that your User class has a method to set the filtered TodoList
-        user.setTaskslist(Collections.singletonList(optionalTodo.get()));
+        // Assuming that your User class has a method to set the filtered TaskList
+        user.setTaskslist(Collections.singletonList(optionalTask.get()));
         return user;
     }
 

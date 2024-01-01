@@ -1,5 +1,6 @@
 .hero-unit{
     display: flex;
+
     height:750px;
     width: 96%;
 }
@@ -18,10 +19,7 @@
     width: 90%;
 }
 
-.hero-image{
-    margin-top: 100px;
-    height: 300px;
-}
+
 
 button{
     margin-left: 3%;

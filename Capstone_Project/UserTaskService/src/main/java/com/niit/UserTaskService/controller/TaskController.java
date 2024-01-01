@@ -129,18 +129,18 @@ public class TaskController {
     }
 
     @GetMapping("/user/get-task/{taskId}")
-    public ResponseEntity<?> getATodo(@PathVariable UUID taskId, HttpServletRequest request) throws UserNotFoundException {
+    public ResponseEntity<?> getATask(@PathVariable UUID taskId, HttpServletRequest request) throws UserNotFoundException {
         try {
             System.out.println("header" + request.getHeader("Authorization"));
             Claims claims = (Claims) request.getAttribute("claims");
             System.out.println("id from claims :: " + claims.getSubject());
             String id = claims.getSubject();
             System.out.println("id :: "+id);
-            responseEntity = new ResponseEntity<>(iTaskService.retrieveSingleTodo(id, taskId), HttpStatus.OK);
+            responseEntity = new ResponseEntity<>(iTaskService.retrieveSingleTask(id, taskId), HttpStatus.OK);
         } catch (UserNotFoundException e) {
             throw new UserNotFoundException();
         } catch (Exception e) {
-            responseEntity = new ResponseEntity<>("Cannot get a todo", HttpStatus.INTERNAL_SERVER_ERROR);
+            responseEntity = new ResponseEntity<>("Cannot get a task", HttpStatus.INTERNAL_SERVER_ERROR);
         }
         return responseEntity;
     }

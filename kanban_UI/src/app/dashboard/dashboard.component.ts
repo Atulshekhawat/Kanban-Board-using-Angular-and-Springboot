@@ -89,6 +89,7 @@ column:string=''
     this.currentTask = task;
   }
 
+  // Drang and Drop
   onDrop($event: any, status: string) {
     const updatedStatus = this.data.find((m) => m.taskId == this.currentTask.taskId);
     if (updatedStatus != undefined) {

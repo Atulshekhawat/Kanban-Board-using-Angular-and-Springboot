@@ -77,6 +77,7 @@ hr{
   border-radius: 5px;
   padding: 10px;
   margin-bottom: 10px;
+  overflow: scroll;
 }
 mat-card {
   max-width: 400px;
@@ -86,8 +87,4 @@ mat-card {
 mat-card-header {
   background-color: #2b8ae9;
   color: white;
-}
-
-button{
-  padding-left:30px;
 }

@@ -18,6 +18,6 @@ public interface ITaskService {
     User updateUserTaskInTaskList(String userEmail,Task task) throws UserNotFoundException, TaskNotFoundException, TaskAlreadyExistsException;
     User deleteTask(String userEmail, UUID taskId) throws TaskNotFoundException, UserNotFoundException;
     List<Task> getAllUserTasksFromTaskList(String userEmail) throws Exception;
-    User retrieveSingleTodo(String userEmail, UUID taskId) throws UserNotFoundException, TaskNotFoundException;
+    User retrieveSingleTask(String userEmail, UUID taskId) throws UserNotFoundException, TaskNotFoundException;
     String getUserName(String userEmail) throws UserNotFoundException;
 }

@@ -48,7 +48,7 @@ span{
 
 .team-card{
     width: 340px;
-    height: 500px;
+    height: 380px;
     margin: 10px;
     border: 1px solid #ccc;
     border-radius: 8px;
@@ -65,4 +65,5 @@ span{
 
 .member-details{
     text-align: center;
+    margin-top: 30%;
 }

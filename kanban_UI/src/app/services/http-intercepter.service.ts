@@ -12,7 +12,7 @@ export class HttpIntercepterService implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     let newReq = req;
-    let token = this.loginService.getTocken();
+    let token = this.loginService.getToken();
     console.log("Interceptor", token);
 
     if(token != null) {

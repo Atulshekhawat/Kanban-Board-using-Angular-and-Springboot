@@ -24,7 +24,7 @@ addTask(){
       console.log(resp);
       let mailBody={
         recipient:sessionStorage.getItem('userEmail'),
-        msgBody:`Dear ${this.taskData.userName},
+        msgBody:`Dear User,
         A new task has been added by you in Kanban Board! 
         Details of the task:
         - Task Title: ${this.taskData.taskName}

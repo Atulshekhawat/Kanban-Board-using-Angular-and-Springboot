@@ -13,6 +13,7 @@ public class AppConfig {
         return builder.routes()
                 .route(p->p.path("/api/v1/**").uri("http://localhost:8087"))
                 .route(p->p.path("/api/v2/**").uri("http://localhost:8089"))
+
                 .build();
     }
 }

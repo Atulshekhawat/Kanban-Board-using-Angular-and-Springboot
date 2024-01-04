@@ -31,6 +31,8 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
 import { AboutUsComponent } from './about-us/about-us.component';
 import { CommonModule } from '@angular/common';
 import { ToastrModule } from 'ngx-toastr';
+import {MatTooltipModule} from '@angular/material/tooltip';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -65,7 +67,8 @@ import { ToastrModule } from 'ngx-toastr';
     DragDropModule,
     MatDialogModule,
     CommonModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    MatTooltipModule
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: HttpIntercepterService, multi: true}],
   bootstrap: [AppComponent]

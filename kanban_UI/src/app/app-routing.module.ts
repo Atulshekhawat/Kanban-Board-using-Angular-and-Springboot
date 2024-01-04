@@ -8,6 +8,7 @@ import { AuthGuard } from './services/auth.guard';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { EditTaskComponent } from './edit-task/edit-task.component';
 import { AboutUsComponent } from './about-us/about-us.component';
+import { CanDeactivateGaurdService } from './services/can-deactivate-gaurd.service';
 
 const routes: Routes = [
   {
@@ -26,7 +27,7 @@ const routes: Routes = [
     path:"dashboard",component:DashboardComponent,canActivate:[AuthGuard]
   },
   {
-    path:"edit-task/:id",component:EditTaskComponent
+    path:"edit-task/:id",component:EditTaskComponent,canDeactivate:[CanDeactivateGaurdService]
   },
   {
     path:"**",component:PageNotFoundComponent

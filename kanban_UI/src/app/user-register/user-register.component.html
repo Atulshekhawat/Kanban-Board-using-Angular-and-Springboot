@@ -12,14 +12,17 @@
       </mat-form-field>
         <mat-form-field appearance="outline">
           <mat-label for="email">Your Email</mat-label>
-          <input matInput type="email" required pattern="[a-z0-9]+@[a-z]+\.[a-z]{2,3}" placeholder="Enter your email" name="email" #email="ngModel" [(ngModel)]="userData.userEmail">
+          <input matInput type="email" required pattern="^[a-zA-Z_][a-zA-Z0-9_]*@[a-zA-Z0-9]+\.[a-zA-Z]{2,}$" placeholder="Enter your email" name="email" #email="ngModel" [(ngModel)]="userData.userEmail">
         <mat-error *ngIf="email.errors?.['required']">Email id is required</mat-error>
         <mat-error *ngIf="email.errors?.['pattern']">Enter valid email id</mat-error>
         </mat-form-field>
         <mat-form-field appearance="outline">
           <mat-label for="password">Password</mat-label>
-          <input matInput type="password" required minlength="8" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" placeholder="Enter your password" name="password" id="password"
+          <input matInput [type]="hide ? 'password' : 'text'" required minlength="8" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" placeholder="Enter your password" name="password" id="password"
           #password="ngModel"  [(ngModel)]="userData.password">
+          <button mat-icon-button type=button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
           <mat-error *ngIf="password.errors?.['required']">Password is Required</mat-error>
             <mat-error *ngIf="password.errors?.['minlength']">Password must be 8 characters,at least 1 uppercase letter, 1 lowercase
               letter and 1 number</mat-error>

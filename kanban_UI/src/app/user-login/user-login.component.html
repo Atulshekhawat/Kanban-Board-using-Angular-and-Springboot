@@ -16,8 +16,11 @@
 
         <mat-form-field appearance="outline">
           <mat-label for="password">Password</mat-label>
-          <input matInput type="password" id="password" name="password" [(ngModel)]="credentials.password"
+          <input matInput [type]="hide ? 'password' : 'text'"  id="password" name="password" [(ngModel)]="credentials.password"
             name="password" #password="ngModel" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" />
+          <button mat-icon-button type=button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
           <mat-error *ngIf="password.errors?.['required']">Password is required</mat-error>
           <mat-error *ngIf="password.errors?.['pattern']">Password must contain at least 8 characters, including at
             least one number, one lowercase, and one uppercase letter.</mat-error>

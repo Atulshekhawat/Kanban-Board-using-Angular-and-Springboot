@@ -14,7 +14,7 @@ export class UserServiceService {
   }
   
   public getUserName(){
-    return this.http.get(`http://localhost:9000/api/v1//user/getUsername`,{responseType:'text'});
+    return this.http.get(`http://localhost:9000/api/v1/user/getUsername`,{responseType:'text'});
   }
 
 

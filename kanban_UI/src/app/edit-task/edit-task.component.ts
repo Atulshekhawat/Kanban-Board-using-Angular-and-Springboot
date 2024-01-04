@@ -11,7 +11,13 @@ import { ToastrService } from 'ngx-toastr';
 export class EditTaskComponent {
   minDate: Date = new Date();
   taskData:any={};
-
+  editStatus: boolean = true;
+  canDeactivate() {
+    if (!this.editStatus) {
+      this.editStatus = confirm("Do you still want to leave?");
+    }
+    return this.editStatus;
+  }
   constructor(private taskService:TaskService,private activatedRoute: ActivatedRoute, private router:Router,private toastr:ToastrService) {}
 
 
@@ -21,7 +27,7 @@ export class EditTaskComponent {
       this.taskService.getSingleTask(taskId).subscribe((response: any) => {
         this.taskData = response.taskslist[0];
         console.log(response.taskslist[0]);
-        // this.editStatus = false;
+        this.editStatus = false;
         
       })
     })
@@ -34,6 +40,7 @@ export class EditTaskComponent {
         this.taskData=resp;
         this.toastr.success("Task Updated Successfully");
         this.router.navigate(['dashboard']);
+        this.editStatus = true;
     },
     (err)=>{
       this.toastr.error("Task Not Updated Something Went Wrong");

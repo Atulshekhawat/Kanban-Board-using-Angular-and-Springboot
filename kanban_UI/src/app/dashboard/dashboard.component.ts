@@ -15,6 +15,7 @@ export class DashboardComponent {
   data: Array<any> = [];
   currentTask: any;
   userName='';
+  
   constructor(public dialog: MatDialog, private taskservice: TaskService,private userService:UserServiceService,private toastr:ToastrService) {}
 
   ngOnInit() {
@@ -50,7 +51,7 @@ export class DashboardComponent {
     });
   }
 
-column:string=''
+
   // Count Number of tasks
   getTasksCount(column: string): number {
     const filteredTasks = this.filterTasks(column);

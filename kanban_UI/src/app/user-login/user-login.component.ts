@@ -7,7 +7,8 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './user-login.component.html',
   styleUrls: ['./user-login.component.css']
 })
-export class UserLoginComponent { 
+export class UserLoginComponent {
+  hide = true; 
   credentials={
     userEmail:'',
     password:''

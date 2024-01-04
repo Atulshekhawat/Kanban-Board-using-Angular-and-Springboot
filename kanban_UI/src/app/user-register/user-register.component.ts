@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./user-register.component.css']
 })
 export class UserRegisterComponent {
+  hide = true;
   
 
   constructor(private UserServiceService:UserServiceService,private toaster:ToastrService,private route:Router){}

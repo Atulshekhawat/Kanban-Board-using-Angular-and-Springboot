@@ -13,9 +13,9 @@
       <mat-error *ngIf="taskName.errors?.['minlength']">Must have a minimum length of
         {{taskName.errors?.['minlength']?.requiredLength}} characters</mat-error>
       <mat-error *ngIf="taskName.errors?.['pattern']">
-        Should start with a capital letter
+        Start with a capital letter and number cannot be there
       </mat-error>
-    </mat-form-field>
+    </mat-form-field><br><br>
     <mat-form-field appearance="outline">
       <mat-label for="taskDescription">Task Description</mat-label>
       <input matInput placeholder="Enter Task Description" name="taskDescription" [(ngModel)]="taskData.taskDescription"

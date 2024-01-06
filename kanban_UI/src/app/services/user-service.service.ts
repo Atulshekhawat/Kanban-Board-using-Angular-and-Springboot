@@ -12,11 +12,23 @@ export class UserServiceService {
     return this.http.post(`http://localhost:9000/api/v1/register`,userData);
     
   }
+
+  public getAllUserEmailAndRole(){
+    return this.http.get(`http://localhost:9000/api/v1/user/users`);
+  }
+
+  public getAllUsers(){
+    return this.http.get(`http://localhost:9000/api/v1/user/getAllUsers`);
+  }
   
   public getUserName(){
     return this.http.get(`http://localhost:9000/api/v1/user/getUsername`,{responseType:'text'});
   }
 
+  
+  public getUserRole(){
+    return this.http.get(`http://localhost:9000/api/v1/user/getUserRole`,{responseType:'text'});
+  }
 
 
   public sendMail(mailBody:object){

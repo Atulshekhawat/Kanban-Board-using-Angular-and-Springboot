@@ -5,13 +5,13 @@
       <h2>CREATE ACCOUNT</h2>
       <form #registerForm="ngForm" (ngSubmit)="register()">
         <mat-form-field appearance="outline">
-          <mat-label for="username">Your Name</mat-label>
+          <mat-label for="username">Full Name</mat-label>
           <input matInput type="text" required pattern="^[A-Za-z\s]*$" placeholder="Enter your Name" name="name" #name="ngModel" [(ngModel)]="userData.userName">
         <mat-error *ngIf="name.errors?.['required']">Name is Required</mat-error>
         <mat-error *ngIf="name.errors?.['pattern']">Enter Valid Name</mat-error>
       </mat-form-field>
         <mat-form-field appearance="outline">
-          <mat-label for="email">Your Email</mat-label>
+          <mat-label for="email">User Email</mat-label>
           <input matInput type="email" required pattern="^[a-zA-Z_][a-zA-Z0-9_]*@[a-zA-Z0-9]+\.[a-zA-Z]{2,}$" placeholder="Enter your email" name="email" #email="ngModel" [(ngModel)]="userData.userEmail">
         <mat-error *ngIf="email.errors?.['required']">Email id is required</mat-error>
         <mat-error *ngIf="email.errors?.['pattern']">Enter valid email id</mat-error>
@@ -26,7 +26,17 @@
           <mat-error *ngIf="password.errors?.['required']">Password is Required</mat-error>
             <mat-error *ngIf="password.errors?.['minlength']">Password must be 8 characters,at least 1 uppercase letter, 1 lowercase
               letter and 1 number</mat-error>
-        </mat-form-field><br><br>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>User Role</mat-label>
+          <mat-select name="role" [(ngModel)]="userData.role" required #role="ngModel">
+            <mat-option value="Team Leader">Team Leader</mat-option>
+            <mat-option value="Team Member">Team Member</mat-option>
+          </mat-select>
+          <mat-error *ngIf="password.errors?.['required']">
+            Role is required
+          </mat-error>
+        </mat-form-field>
         <!-- <p><input type="checkbox" required> I agree to the <a href="">Terms and Conditions</a></p> -->
         <button mat-raised-button type="submit" color="primary">Register</button>
         <button mat-raised-button type="reset" color="warn">Reset</button>

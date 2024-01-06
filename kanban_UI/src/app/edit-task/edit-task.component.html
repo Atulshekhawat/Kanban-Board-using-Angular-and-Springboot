@@ -14,7 +14,7 @@
         <mat-error *ngIf="taskName.errors?.['minlength']">Must have a minimum length of
           {{taskName.errors?.['minlength']?.requiredLength}} characters</mat-error>
         <mat-error *ngIf="taskName.errors?.['pattern']">
-          Should start with a capital letter
+          Should start with a capital letter also number cannot be taken
         </mat-error>
       </mat-form-field>
       <mat-form-field appearance="outline">
@@ -33,13 +33,13 @@
         <mat-error *ngIf="dueDate.errors?.['required']">Due date is required</mat-error>
       </mat-form-field>
 
-      <mat-form-field appearance="outline">
+      <!-- <mat-form-field appearance="outline">
         <mat-label for="assigned to">Assigned To</mat-label>
         <input matInput placeholder="Enter your username" name="assignedTo" [(ngModel)]="taskData.assignedTo"
           #assignedTo="ngModel" required pattern="[a-zA-Z\s]+" />
         <mat-error *ngIf="assignedTo.errors?.['required']">Assigned To is required</mat-error>
         <mat-error *ngIf="assignedTo.errors?.['pattern']">Should allow only characters</mat-error>
-      </mat-form-field>
+      </mat-form-field> -->
       <mat-form-field>
         <mat-label>Priority</mat-label>
         <mat-select name="priority" [(ngModel)]="taskData.priority" required #priority="ngModel">

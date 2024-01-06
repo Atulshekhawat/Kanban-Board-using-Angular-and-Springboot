@@ -1,68 +1,65 @@
-<h2>Add Task</h2>
-<hr>
-<div class="container">
-  <div class="image">
-    <img src="../../assets/add-task1.gif" alt="add-task1" width="400px" height="500px">
+<div class="main-container">
+  <h1>Add Task</h1>
+  <hr>
+  <div class="container">
+    <div class="image">
+      <img src="../../assets/add-task1.gif" alt="add-task1" width="400px" height="500px">
+    </div>
+    <form class="form" #addTaskForm="ngForm" (ngSubmit)="addTask()">
+      <mat-form-field>
+        <mat-label for="taskName">Task Name</mat-label>
+        <input matInput placeholder="Enter Task Name" name="taskName" [(ngModel)]="taskData.taskName"
+          #taskName="ngModel" required minlength="5" pattern="[A-Z][a-zA-Z\s]*" />
+        <mat-error *ngIf="taskName.errors?.['required']">Task name is required</mat-error>
+        <mat-error *ngIf="taskName.errors?.['minlength']">Must have a minimum length of
+          {{taskName.errors?.['minlength']?.requiredLength}} characters</mat-error>
+        <mat-error *ngIf="taskName.errors?.['pattern']">
+          Should start with a capital letter and contain only letters and spaces.
+        </mat-error>
+      </mat-form-field><br><br>
+      <mat-form-field appearance="outline">
+        <mat-label for="taskDescription">Task Description</mat-label>
+        <input matInput placeholder="Enter Task Description" name="taskDescription"
+          [(ngModel)]="taskData.taskDescription" #taskDescription="ngModel" required />
+        <mat-error *ngIf="taskDescription.errors?.['required']">Description is required</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Task Due Date</mat-label>
+        <input matInput [matDatepicker]="picker" name="dueDate" required [(ngModel)]="taskData.dueDate" [min]="minDate"
+          required #dueDate="ngModel" />
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <mat-error *ngIf="dueDate.errors?.['required']">Due date is required</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Assigned To</mat-label>
+        <mat-select name="assignedTo" required [(ngModel)]="taskData.assignedTo" #assignedTo="ngModel">
+          <ng-container *ngFor="let user of userData">
+            <mat-option *ngIf="user.role === 'Team Member'" [value]="user.userEmail">
+              {{ user.userEmail }}
+            </mat-option>
+          </ng-container>
+        </mat-select>
+        <mat-error *ngIf="assignedTo.invalid && assignedTo.touched">
+          assignedTo is required
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Priority</mat-label>
+        <mat-select name="priority" [(ngModel)]="taskData.priority" required #priority="ngModel">
+          <mat-option value="Low">Low</mat-option>
+          <mat-option value="Medium">Medium</mat-option>
+          <mat-option value="High">High</mat-option>
+        </mat-select>
+        <mat-error *ngIf="priority.invalid && priority.touched">
+          Priority is required
+        </mat-error>
+      </mat-form-field>
+      <button type="submit" mat-raised-button color="primary" [disabled]="addTaskForm.invalid">Add Task</button>
+
+      <!-- <p>  {{taskData | json}}</p>   -->
+    </form>
+
   </div>
-  <form class="form" #addTaskForm="ngForm" (ngSubmit)="addTask()">
-    <mat-form-field>
-      <mat-label for="taskName">Task Name</mat-label>
-      <input matInput placeholder="Enter Task Name" name="taskName" [(ngModel)]="taskData.taskName" #taskName="ngModel"
-        required minlength="5" pattern="[A-Z][a-zA-Z\s]*" />
-      <mat-error *ngIf="taskName.errors?.['required']">Task name is required</mat-error>
-      <mat-error *ngIf="taskName.errors?.['minlength']">Must have a minimum length of
-        {{taskName.errors?.['minlength']?.requiredLength}} characters</mat-error>
-      <mat-error *ngIf="taskName.errors?.['pattern']">
-        Start with a capital letter and number cannot be there
-      </mat-error>
-    </mat-form-field><br><br>
-    <mat-form-field appearance="outline">
-      <mat-label for="taskDescription">Task Description</mat-label>
-      <input matInput placeholder="Enter Task Description" name="taskDescription" [(ngModel)]="taskData.taskDescription"
-        #taskDescription="ngModel" required />
-      <mat-error *ngIf="taskDescription.errors?.['required']">Description is required</mat-error>
-    </mat-form-field>
-
-    <mat-form-field>
-      <mat-label>Task Due Date</mat-label>
-      <input matInput [matDatepicker]="picker" name="dueDate" required [(ngModel)]="taskData.dueDate" [min]="minDate"
-        required #dueDate="ngModel" />
-      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
-      <mat-error *ngIf="dueDate.errors?.['required']">Due date is required</mat-error>
-    </mat-form-field>
-
-    <mat-form-field appearance="outline">
-      <mat-label for="assigned to">Assigned To</mat-label>
-      <input matInput placeholder="Enter your username" name="assignedTo" [(ngModel)]="taskData.assignedTo"
-        #assignedTo="ngModel" required pattern="[a-zA-Z\s]+" />
-      <mat-error *ngIf="assignedTo.errors?.['required']">Assigned To is required</mat-error>
-      <mat-error *ngIf="assignedTo.errors?.['pattern']">Should allow only characters</mat-error>
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>Priority</mat-label>
-      <mat-select name="priority" [(ngModel)]="taskData.priority" required #priority="ngModel">
-        <mat-option value="Low">Low</mat-option>
-        <mat-option value="Medium">Medium</mat-option>
-        <mat-option value="High">High</mat-option>
-      </mat-select>
-      <mat-error *ngIf="priority.invalid && priority.touched">
-        Priority is required
-      </mat-error>
-    </mat-form-field>
-    <!-- <mat-form-field>
-      <mat-label>Status</mat-label>
-      <select matNativeControl [(value)]="selected" required  name="status" [(ngModel)]="taskData.status" #status="ngModel">
-        <option value="To do">To do</option>
-
-      </select>
-      <mat-error *ngIf="status.invalid && (status.dirty || status.touched)">
-        <span *ngIf="status.errors?.['required']">Status is required</span>
-      </mat-error>
-    </mat-form-field> -->
-    <button type="submit" mat-raised-button color="primary" [mat-dialog-close]="true"  [disabled]="addTaskForm.invalid">Add Task</button>
-
-    <!-- <p>  {{taskData | json}}</p>   -->
-  </form>
-
 </div>

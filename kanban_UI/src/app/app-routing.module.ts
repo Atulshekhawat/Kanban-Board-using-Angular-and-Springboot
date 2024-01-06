@@ -9,6 +9,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { EditTaskComponent } from './edit-task/edit-task.component';
 import { AboutUsComponent } from './about-us/about-us.component';
 import { CanDeactivateGaurdService } from './services/can-deactivate-gaurd.service';
+import { AddTaskComponent } from './add-task/add-task.component';
 
 const routes: Routes = [
   {
@@ -28,6 +29,9 @@ const routes: Routes = [
   },
   {
     path:"edit-task/:id",component:EditTaskComponent,canDeactivate:[CanDeactivateGaurdService]
+  },
+  {
+    path:"dashboard/add-task",component:AddTaskComponent
   },
   {
     path:"**",component:PageNotFoundComponent

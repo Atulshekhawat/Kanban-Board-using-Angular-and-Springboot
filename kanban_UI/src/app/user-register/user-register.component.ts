@@ -17,11 +17,12 @@ export class UserRegisterComponent {
     userEmail:"",
     userName:"",
     password:"",
+    role:"",
     taskslist:null
   }
 
   register(){
-    if(( this.userData.userName!='' && this.userData.userEmail !='' && this.userData.password !='') && (this.userData.userName!=null && this.userData.userEmail!=null && this.userData.password!=null)){
+    if(( this.userData.userName!='' && this.userData.userEmail !='' && this.userData.password !='' && this.userData.role!=='') && (this.userData.userName!=null && this.userData.userEmail!=null && this.userData.password!=null && this.userData.role!=null)){
     this.UserServiceService.register(this.userData).subscribe(
       (res) => {
         
@@ -41,9 +42,9 @@ export class UserRegisterComponent {
           `,
           subject: 'Register Successfully Team: KanBan Board'
         };
-        this.UserServiceService.sendMail(mailBody).subscribe((resp)=>{
-          console.log(resp);
-        });
+        // this.UserServiceService.sendMail(mailBody).subscribe((resp)=>{
+        //   console.log(resp);
+        // });
       },
       (err)=>{
         this.toaster.error("User Already Exist");

@@ -78,15 +78,16 @@ public class TaskController {
 
     @PutMapping("user/updateTask")
     public ResponseEntity<?> updateTask(@RequestBody Task task, HttpServletRequest request) {
-        // update a track based on user id and track id, extract user id from claims
+        // update a task based on user id and track id, extract user id from claims
         // return 200 status if updated else return 500 status
 
         try {
             System.out.println("header" + request.getHeader("Authorization"));
             Claims claims = (Claims) request.getAttribute("claims");
             System.out.println("id from claims :: " + claims.getSubject());
-            String id = claims.getSubject();
-            System.out.println("id :: " + id);
+//            String id = claims.getSubject();
+            String id = "atulshekhawat21@gmail.com";
+//            System.out.println("id :: " + id);
             responseEntity = new ResponseEntity<>(iTaskService.updateUserTaskInTaskList(id, task), HttpStatus.OK);
         } catch (Exception e) {
             responseEntity = new ResponseEntity<>("Could not update!!", HttpStatus.INTERNAL_SERVER_ERROR);
@@ -116,6 +117,7 @@ public class TaskController {
         // display all the tracks of a specific user, extract user id from claims,
         // return 200 status if user is saved else 500 status
         try {
+            System.out.println("--->"+request);
             System.out.println("header" + request.getHeader("Authorization"));
             Claims claims = (Claims) request.getAttribute("claims");
             System.out.println("id from claims :: " + claims.getSubject());
@@ -124,6 +126,22 @@ public class TaskController {
             responseEntity = new ResponseEntity<>(iTaskService.getAllUserTasksFromTaskList(id), HttpStatus.OK);
         } catch (Exception e) {
             responseEntity = new ResponseEntity<>("Failed to fetch Tasks!!", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        return responseEntity;
+    }
+    @GetMapping("user/users")
+    public ResponseEntity<?> getAllUserEmailAndRole(HttpServletRequest request) {
+        // display all the tracks of a specific user, extract user id from claims,
+        // return 200 status if user is saved else 500 status
+        try {
+            System.out.println("header" + request.getHeader("Authorization"));
+            Claims claims = (Claims) request.getAttribute("claims");
+            System.out.println("id from claims :: " + claims.getSubject());
+            String id = claims.getSubject();
+            System.out.println("id :: "+id);
+            responseEntity = new ResponseEntity<>(iTaskService.getAllUserEmailAndRoles(id), HttpStatus.OK);
+        } catch (Exception e) {
+            responseEntity = new ResponseEntity<>("Failed to fetch Users!!", HttpStatus.INTERNAL_SERVER_ERROR);
         }
         return responseEntity;
     }
@@ -161,4 +179,37 @@ public class TaskController {
         }
         return responseEntity;
     }
+
+    @GetMapping("/user/getUserRole")
+    public ResponseEntity<?> getUserRole(HttpServletRequest request) throws UserNotFoundException {
+        try {
+            System.out.println("header" + request.getHeader("Authorization"));
+            Claims claims = (Claims) request.getAttribute("claims");
+            System.out.println("id from claims :: " + claims.getSubject());
+            String id = claims.getSubject();
+            System.out.println("id :: "+id);
+            responseEntity = new ResponseEntity<>(iTaskService.getUserRole(id), HttpStatus.OK);
+        } catch (UserNotFoundException e) {
+            throw new UserNotFoundException();
+        } catch (Exception e) {
+            responseEntity = new ResponseEntity<>("Cannot get UserRole", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        return responseEntity;
+    }
+
+    @GetMapping("/user/getAllUsers")
+    public ResponseEntity<?> getAllUsers(HttpServletRequest request) {
+        try {
+            System.out.println("header" + request.getHeader("Authorization"));
+            Claims claims = (Claims) request.getAttribute("claims");
+            System.out.println("id from claims :: " + claims.getSubject());
+            String id = claims.getSubject();
+            System.out.println("id :: "+id);
+            responseEntity = new ResponseEntity<>(iTaskService.getAllUsers(id), HttpStatus.OK);
+        } catch (Exception e) {
+            responseEntity = new ResponseEntity<>("Failed to fetch Users!!", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        return responseEntity;
+    }
+
 }

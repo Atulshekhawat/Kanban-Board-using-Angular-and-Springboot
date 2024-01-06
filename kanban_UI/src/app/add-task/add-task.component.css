@@ -1,3 +1,13 @@
+.main-container{
+    width: 900px;
+    height: 700px;
+    margin: 2%;
+    text-align: center;
+    margin: 2% auto;
+}
+
+
+
 .container{
     width: 770px;
     height: 500px;
@@ -20,6 +30,6 @@ h2{
 
 button{
     margin-left: 91%;
-    width: 100px;
+    width: 190px;
 }
 

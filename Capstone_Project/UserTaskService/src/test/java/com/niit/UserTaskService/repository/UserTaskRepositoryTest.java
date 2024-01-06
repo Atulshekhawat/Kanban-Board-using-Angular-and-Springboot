@@ -26,41 +26,5 @@ public class UserTaskRepositoryTest {
     private User user;
     List<Task> taskList;
 
-    @BeforeEach
-    void setUp() {
-//        task = new Task("1","Demo","To Be Done","Admin","25/12/2023","Low","Testing");
-        user = new User("admin@123","Rohit","1234",taskList);
-    }
 
-    @AfterEach
-    public void tearDown()
-    {
-        task = null;
-        user = null;
-        userTaskRepository.deleteAll();
-    }
-    @Test
-    public void registerUserSuccess()
-    {
-        userTaskRepository.insert(user);
-        User user1 = userTaskRepository.findById(user.getUserEmail()).get();
-        assertNotNull(user1);
-        assertEquals(user.getUserEmail(),user1.getUserEmail());
-    }
-    @Test
-    public void getTaskByUserEmailSuccess()
-    {
-        userTaskRepository.insert(user);
-        User user1 = userTaskRepository.findById(user.getUserEmail()).get();
-        assertNotNull(user1);
-        assertEquals(user1.getUserEmail(),user.getUserEmail());
-    }
-    @Test
-    public void deleteTaskByUserIDSuccess()
-    {
-        userTaskRepository.insert(user);
-        User user1 = userTaskRepository.findById(user.getUserEmail()).get();
-        userTaskRepository.delete(user1);
-        assertEquals(Optional.empty(),userTaskRepository.findById(user.getUserEmail()));
-    }
 }

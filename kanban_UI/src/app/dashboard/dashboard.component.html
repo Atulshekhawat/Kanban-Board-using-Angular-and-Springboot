@@ -1,114 +1,206 @@
 <div class="heading">
+
+
   <h1>Welcome to {{userName}}'s KanBan Board</h1>
-  <button mat-raised-button color="primary" (click)="openDialog()">Add Task</button>
+  <button mat-raised-button *ngIf="UserRole == 'Team Leader'" color="primary" routerLink="add-task">Add Task</button>
 </div>
 
 <div class="kanban-dashboard">
   <div class="column" (dragover)="onDragOver($event)" (drop)="onDrop($event,'To do')">
     <h3>To Do </h3>
-    <p>Number of Tasks : {{ getTasksCount('To do') }}</p>
+    <p *ngIf="UserRole == 'Team Leader'">Number of Tasks : {{ getTasksCount('To do') }}</p>
     <hr>
-    <div class="task" draggable="true" *ngFor="let task of filterTasks('To do')" (dragstart)="onDragStart(task)">
-      <mat-card [ngStyle]="{'background-color': getBackgroundColor(task.priority)}">
-        <mat-card-header>
-          <mat-card-title>{{task.taskName}}</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-          <p>Task Description: {{task.taskDescription}}</p>
-          <p>Task Assigned To: {{task.assignedTo}}</p>
-          <p>Due Date: {{task.dueDate | date}}</p>
-          <p>Priority : {{task.priority}}</p>
-          <p>Status: {{task.status}}</p>
-        </mat-card-content>
-        <mat-card-footer>
+
+    <!-- --------------------------------------------------- TO DO COLUMN ----------------------------------------------- -->
+    
+    <div *ngIf="UserRole == 'Team Leader'">
+      <div class="task" draggable="true" *ngFor="let task of filterTasks('To do')" (dragstart)="onDragStart(task)">
+        <mat-card [ngStyle]="{'background-color': getBackgroundColor(task.priority)}">
+          <mat-card-header>
+            <mat-card-title>{{task.taskName}}</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <p>Task Description: {{task.taskDescription}}</p>
+            <p>Task Assigned To: {{task.assignedTo}}</p>
+            <p>Due Date: {{task.dueDate | date}}</p>
+            <p>Priority : {{task.priority}}</p>
+            <p>Status: {{task.status}}</p>
+          </mat-card-content>
+          <mat-card-footer>
             <hr>
             <div>
-                <button routerLink="/edit-task/{{task.taskId}}" mat-button >Edit</button>
-                <button mat-button (click)="deleteTask(task.taskId)" >Delete</button>
+              <button routerLink="/edit-task/{{task.taskId}}" mat-button>Edit</button>
+              <button mat-button (click)="deleteTask(task.taskId)">Delete</button>
             </div>
-        </mat-card-footer>
-    </mat-card>
+          </mat-card-footer>
+        </mat-card>
+      </div>
     </div>
+    <div *ngIf="UserRole == 'Team Member'">
+        <div class="task" draggable="true"  *ngFor="let task of filterAllUserTasks('To do') " (dragstart)="onDragStart(task)" >
+          <div *ngIf="sessionMail === task.assignedTo">
+            <mat-card [ngStyle]="{'background-color': getBackgroundColor(task.priority)}">
+              <mat-card-header>
+                <mat-card-title>{{task.taskName}}</mat-card-title>
+              </mat-card-header>
+              <mat-card-content>
+                <p>{{task.taskDescription}}</p>
+                <p>Assigned To: {{task.assignedTo}}</p>
+                <p>Due Date: {{task.dueDate | date}}</p>
+                <p>Priority: {{task.priority}}</p>
+                <p>Status: {{task.status}}</p>
+              </mat-card-content>
+            </mat-card>
+          </div>
+        </div>
+      </div>
   </div>
+
+  <!-- --------------------------------------------------- IN PROGRESS COLUMN ----------------------------------------------- -->
 
   <div class="column" (dragover)="onDragOver($event)" (drop)="onDrop($event,'In Progress')">
-    <h3>In Progress</h3>
-    <p>Number of Tasks : {{ getTasksCount('In Progress') }}</p>
+    <h3>In Progress </h3>
+    <p *ngIf="UserRole == 'Team Leader'">Number of Tasks : {{ getTasksCount('In Progress') }}</p>
     <hr>
-    <div class="task" draggable="true" *ngFor="let task of filterTasks('In Progress')" (dragstart)="onDragStart(task)">
-      <mat-card [ngStyle]="{'background-color': getBackgroundColor(task.priority)}">
-        <mat-card-header>
-          <mat-card-title>{{task.taskName}}</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-          <p>Task Description: {{task.taskDescription}}</p>
-          <p>Task Assigned To: {{task.assignedTo}}</p>
-          <p>Due Date: {{task.dueDate | date}}</p>
-          <p>Priority : {{task.priority}}</p>
-          <p>Status: {{task.status}}</p>
-        </mat-card-content>
-        <mat-card-footer>
+    <div *ngIf="UserRole == 'Team Leader'">
+      <div class="task" draggable="true" *ngFor="let task of filterTasks('In Progress')" (dragstart)="onDragStart(task)">
+        <mat-card [ngStyle]="{'background-color': getBackgroundColor(task.priority)}">
+          <mat-card-header>
+            <mat-card-title>{{task.taskName}}</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <p>Task Description: {{task.taskDescription}}</p>
+            <p>Task Assigned To: {{task.assignedTo}}</p>
+            <p>Due Date: {{task.dueDate | date}}</p>
+            <p>Priority : {{task.priority}}</p>
+            <p>Status: {{task.status}}</p>
+          </mat-card-content>
+          <mat-card-footer>
             <hr>
             <div>
-                <button routerLink="/edit-task/{{task.taskId}}" mat-button >Edit</button>
-                <button mat-button (click)="deleteTask(task.taskId)" >Delete</button>
+              <button routerLink="/edit-task/{{task.taskId}}" mat-button>Edit</button>
+              <button mat-button (click)="deleteTask(task.taskId)">Delete</button>
             </div>
-        </mat-card-footer>
-    </mat-card>
+          </mat-card-footer>
+        </mat-card>
+      </div>
     </div>
+    <div *ngIf="UserRole == 'Team Member'">
+        <div class="task" draggable="true" *ngFor="let task of filterAllUserTasks('In Progress') " (dragstart)="onDragStart(task)">
+          <div *ngIf="sessionMail === task.assignedTo">
+            <mat-card [ngStyle]="{'background-color': getBackgroundColor(task.priority)}">
+              <mat-card-header>
+                <mat-card-title>{{task.taskName}}</mat-card-title>
+              </mat-card-header>
+              <mat-card-content>
+                <p>{{task.taskDescription}}</p>
+                <p>Assigned To: {{task.assignedTo}}</p>
+                <p>Due Date: {{task.dueDate | date}}</p>
+                <p>Priority: {{task.priority}}</p>
+                <p>Status: {{task.status}}</p>
+              </mat-card-content>
+            </mat-card>
+          </div>
+        </div>
+      </div>
   </div>
 
-  <div class="column" (dragover)="onDragOver($event)" (drop)="onDrop($event,'Completed')" >
+
+  <!-- --------------------------------------------------- COMPLETED COLUMN ----------------------------------------------- -->
+
+  <div class="column" (dragover)="onDragOver($event)" (drop)="onDrop($event,'Completed')">
     <h3>Completed</h3>
-    <p>Number of Tasks : {{ getTasksCount('Completed') }}</p>
+    <p *ngIf="UserRole == 'Team Leader'">Number of Tasks : {{ getTasksCount('Completed') }}</p>
     <hr>
-    <div class="task" draggable="true" *ngFor="let task of filterTasks('Completed')" (dragstart)="onDragStart(task)">
-      <mat-card [ngStyle]="{'background-color': getBackgroundColor(task.priority)}">
-        <mat-card-header>
-          <mat-card-title>{{task.taskName}}</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-          <p>Task Description: {{task.taskDescription}}</p>
-          <p>Task Assigned To: {{task.assignedTo}}</p>
-          <p>Due Date: {{task.dueDate | date}}</p>
-          <p>Priority : {{task.priority}}</p>
-          <p>Status: {{task.status}}</p>
-        </mat-card-content>
-        <mat-card-footer>
+    <div *ngIf="UserRole == 'Team Leader'">
+      <div class="task" draggable="true" *ngFor="let task of filterTasks('Completed')" (dragstart)="onDragStart(task)">
+        <mat-card [ngStyle]="{'background-color': getBackgroundColor(task.priority)}">
+          <mat-card-header>
+            <mat-card-title>{{task.taskName}}</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <p>Task Description: {{task.taskDescription}}</p>
+            <p>Task Assigned To: {{task.assignedTo}}</p>
+            <p>Due Date: {{task.dueDate | date}}</p>
+            <p>Priority : {{task.priority}}</p>
+            <p>Status: {{task.status}}</p>
+          </mat-card-content>
+          <mat-card-footer>
             <hr>
             <div>
-                <button routerLink="/edit-task/{{task.taskId}}" mat-button >Edit</button>
-                <button mat-button (click)="deleteTask(task.taskId)">Delete</button>
+              <button routerLink="/edit-task/{{task.taskId}}" mat-button>Edit</button>
+              <button mat-button (click)="deleteTask(task.taskId)">Delete</button>
             </div>
-        </mat-card-footer>
-    </mat-card>
+          </mat-card-footer>
+        </mat-card>
+      </div>
     </div>
+    <div *ngIf="UserRole == 'Team Member'">
+        <div class="task"  draggable="true" *ngFor="let task of filterAllUserTasks('Completed') " (dragstart)="onDragStart(task)">
+          <div *ngIf="sessionMail === task.assignedTo">
+            <mat-card [ngStyle]="{'background-color': getBackgroundColor(task.priority)}">
+              <mat-card-header>
+                <mat-card-title>{{task.taskName}}</mat-card-title>
+              </mat-card-header>
+              <mat-card-content>
+                <p>{{task.taskDescription}}</p>
+                <p>Assigned To: {{task.assignedTo}}</p>
+                <p>Due Date: {{task.dueDate | date}}</p>
+                <p>Priority: {{task.priority}}</p>
+                <p>Status: {{task.status}}</p>
+              </mat-card-content>
+            </mat-card>
+          </div>
+        </div>
+      </div>
   </div>
+
+  <!-- --------------------------------------------------- BACKLOG COLUMN ----------------------------------------------- -->
 
   <div class="column" (dragover)="onDragOver($event)" (drop)="onDrop($event,'Backlog')">
-    <h3>Back Log</h3>
-    <p>Number of Tasks : {{ getTasksCount('Backlog') }}</p>
+    <h3>Backlog</h3>
+    <p *ngIf="UserRole == 'Team Leader'">Number of Tasks : {{ getTasksCount('Backlog') }}</p>
     <hr>
-    <div class="task" draggable="true" *ngFor="let task of filterTasks('Backlog')" (dragstart)="onDragStart(task)">
-     <mat-card [ngStyle]="{'background-color': getBackgroundColor(task.priority)}">
-        <mat-card-header>
-          <mat-card-title>{{task.taskName}}</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-          <p>Task Description: {{task.taskDescription}}</p>
-          <p>Task Assigned To: {{task.assignedTo}}</p>
-          <p>Due Date: {{task.dueDate | date}}</p>
-          <p>Priority : {{task.priority}}</p>
-          <p>Status: {{task.status}}</p>
-        </mat-card-content>
-        <mat-card-footer>
+    <div *ngIf="UserRole == 'Team Leader'">
+      <div class="task" draggable="true" *ngFor="let task of filterTasks('Backlog')" (dragstart)="onDragStart(task)">
+        <mat-card [ngStyle]="{'background-color': getBackgroundColor(task.priority)}">
+          <mat-card-header>
+            <mat-card-title>{{task.taskName}}</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <p>Task Description: {{task.taskDescription}}</p>
+            <p>Task Assigned To: {{task.assignedTo}}</p>
+            <p>Due Date: {{task.dueDate | date}}</p>
+            <p>Priority : {{task.priority}}</p>
+            <p>Status: {{task.status}}</p>
+          </mat-card-content>
+          <mat-card-footer>
             <hr>
             <div>
-                <button routerLink="/edit-task/{{task.taskId}}" mat-button >Edit</button>
-                <button mat-button (click)="deleteTask(task.taskId)" >Delete</button>
+              <button routerLink="/edit-task/{{task.taskId}}" mat-button>Edit</button>
+              <button mat-button (click)="deleteTask(task.taskId)">Delete</button>
             </div>
-        </mat-card-footer>
-    </mat-card>
+          </mat-card-footer>
+        </mat-card>
+      </div>
     </div>
+    <div *ngIf="UserRole == 'Team Member'">
+        <div class="task" draggable="true" *ngFor="let task of filterAllUserTasks('Backlog') " (dragstart)="onDragStart(task)">
+          <div *ngIf="sessionMail === task.assignedTo">
+            <mat-card [ngStyle]="{'background-color': getBackgroundColor(task.priority)}">
+              <mat-card-header>
+                <mat-card-title>{{task.taskName}}</mat-card-title>
+              </mat-card-header>
+              <mat-card-content>
+                <p>{{task.taskDescription}}</p>
+                <p>Assigned To: {{task.assignedTo}}</p>
+                <p>Due Date: {{task.dueDate | date}}</p>
+                <p>Priority: {{task.priority}}</p>
+                <p>Status: {{task.status}}</p>
+              </mat-card-content>
+            </mat-card>
+          </div>
+        </div>
+      </div>
   </div>
 </div>

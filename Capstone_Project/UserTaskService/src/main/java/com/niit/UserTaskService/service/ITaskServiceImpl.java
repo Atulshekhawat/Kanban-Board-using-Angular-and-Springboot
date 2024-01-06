@@ -56,6 +56,36 @@ public class ITaskServiceImpl implements ITaskService {
         }
         return userTaskRepository.save(existingUser);
     }
+
+    @Override
+    public List<User> getAllUserEmailAndRoles(String userEmail) throws Exception {
+        // Get all the tasks for a specific user
+//        if (userTaskRepository.findById(userEmail).isEmpty()) {
+//            throw new UserNotFoundException();
+//        }
+//        return userTaskRepository.findAll();
+        if (userTaskRepository.findById(userEmail).isEmpty()) {
+            throw new UserNotFoundException();
+        }
+
+        // Retrieve all users
+        List<User> allUsers = userTaskRepository.findAll();
+
+        // Create a new list to store users with only email populated
+        List<User> usersWithEmailsOnly = new ArrayList<>();
+
+        // Populate the list with users containing only emails
+        for (User user : allUsers) {
+            User userWithEmailOnly = new User();
+            userWithEmailOnly.setUserEmail(user.getUserEmail());
+            userWithEmailOnly.setRole(user.getRole());
+            usersWithEmailsOnly.add(userWithEmailOnly);
+        }
+
+        return usersWithEmailsOnly;
+    }
+
+
     @Override
     public User saveTaskToTaskList(Task task, String userEmail) throws TaskAlreadyExistsException, UserNotFoundException {
         // Save the task to task list of user.
@@ -172,5 +202,21 @@ public class ITaskServiceImpl implements ITaskService {
             throw new UserNotFoundException();
         }
         return userTaskRepository.findById(userEmail).get().getUserName();
+    }
+    @Override
+    public String getUserRole(String userEmail) throws UserNotFoundException {
+        if (userTaskRepository.findById(userEmail).isEmpty()) {
+            throw new UserNotFoundException();
+        }
+        return userTaskRepository.findById(userEmail).get().getRole();
+    }
+
+    @Override
+    public List<User> getAllUsers(String userEmail) throws Exception {
+        // Get all the tasks for a specific user
+        if (userTaskRepository.findById(userEmail).isEmpty()) {
+            throw new UserNotFoundException();
+        }
+        return userTaskRepository.findAll();
     }
 }

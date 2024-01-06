@@ -20,6 +20,6 @@ export class HeaderSectionComponent {
   logoutUser(){
     this.loginService.logout();
     location.reload();
-    
+    sessionStorage.removeItem('userEmail');
   }
 }

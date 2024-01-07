@@ -14,6 +14,7 @@ public class User {
         private String userName;
         private String password;
         private String role;
+
         private List<Task> taskslist;
 
     public User() {
@@ -25,6 +26,7 @@ public class User {
         this.userName = userName;
         this.password = password;
         this.role = role;
+
         this.taskslist = taskslist;
     }
 
@@ -35,7 +37,6 @@ public class User {
     public void setUserEmail(String userEmail) {
         this.userEmail = userEmail;
     }
-
 
     public String getUserName() {
         return userName;
@@ -60,6 +61,7 @@ public class User {
     public void setRole(String role) {
         this.role = role;
     }
+
 
     public List<Task> getTaskslist() {
         return taskslist;

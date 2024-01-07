@@ -10,8 +10,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./add-task.component.css'],
 })
 export class AddTaskComponent {
-  taskData: any = { status: 'To do' };
-  // userData: Array<any> = [];
+  taskData: any = { status: 'To do', assignedBy: sessionStorage.getItem('userEmail') };
   userData: any[] = [];
   userEmails: string[] = [];
   minDate: Date = new Date();
@@ -28,7 +27,7 @@ export class AddTaskComponent {
       (resp) => {
         console.log(resp);
         let mailBody = {
-          recipient: sessionStorage.getItem('userEmail'),
+          recipient: this.taskData.assignedTo,
           msgBody: `Dear User,
         A new task has been added by you in Kanban Board! 
         Details of the task:
@@ -45,6 +44,7 @@ export class AddTaskComponent {
         KanBan Board Pvt. Ltd.`,
           subject: 'Task Added Successfully',
         };
+
         // this.userService.sendMail(mailBody).subscribe((resp)=>{
         //   console.log(resp);
         // });

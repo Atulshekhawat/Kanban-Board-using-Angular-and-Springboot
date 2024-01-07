@@ -16,10 +16,11 @@ public class Task {
     private String priority; //high,low,medium
     private String status;  //To Do, InProgress,Testing,Completed
 
+    private String assignedBy;
     public Task() {
     }
 
-    public Task(UUID taskId, String taskName, String taskDescription, String assignedTo, String dueDate, String priority, String status) {
+    public Task(UUID taskId, String taskName, String taskDescription, String assignedTo, String dueDate, String priority, String status, String assignedBy) {
         this.taskId = taskId;
         this.taskName = taskName;
         this.taskDescription = taskDescription;
@@ -27,6 +28,7 @@ public class Task {
         this.dueDate = dueDate;
         this.priority = priority;
         this.status = status;
+        this.assignedBy = assignedBy;
     }
 
     public UUID getTaskId() {
@@ -85,6 +87,14 @@ public class Task {
         this.status = status;
     }
 
+    public String getAssignedBy() {
+        return assignedBy;
+    }
+
+    public void setAssignedBy(String assignedBy) {
+        this.assignedBy = assignedBy;
+    }
+
     @Override
     public String toString() {
         return "Task{" +
@@ -95,6 +105,7 @@ public class Task {
                 ", dueDate='" + dueDate + '\'' +
                 ", priority='" + priority + '\'' +
                 ", status='" + status + '\'' +
+                ", assignedBy='" + assignedBy + '\'' +
                 '}';
     }
 }

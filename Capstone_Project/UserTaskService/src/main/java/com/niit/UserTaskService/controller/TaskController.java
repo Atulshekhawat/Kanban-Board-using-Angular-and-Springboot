@@ -117,7 +117,7 @@ public class TaskController {
         // display all the tracks of a specific user, extract user id from claims,
         // return 200 status if user is saved else 500 status
         try {
-            System.out.println("--->"+request);
+
             System.out.println("header" + request.getHeader("Authorization"));
             Claims claims = (Claims) request.getAttribute("claims");
             System.out.println("id from claims :: " + claims.getSubject());

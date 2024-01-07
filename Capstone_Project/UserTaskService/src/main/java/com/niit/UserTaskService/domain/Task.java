@@ -15,7 +15,6 @@ public class Task {
     private String dueDate;
     private String priority; //high,low,medium
     private String status;  //To Do, InProgress,Testing,Completed
-
     private String assignedBy;
     public Task() {
     }

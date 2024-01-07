@@ -3,7 +3,7 @@
 
 ## Overview
 
-This project is a Kanban Board application developed using Angular for the frontend and Spring Boot for the backend. It helps teams manage their work by visualizing tasks on a Kanban board with columns representing different stages of the workflow.
+This project is a Kanban Board application developed using Angular for the front end and Spring Boot for the back end. It helps teams manage their work by visualizing tasks on a Kanban board with columns representing different stages of the workflow.
 
 ## Features
 
@@ -23,16 +23,13 @@ This project is a Kanban Board application developed using Angular for the front
 ### Installation
 
 1. Clone the repository:
-
-   git clone https://github.com/Atulshekhawat/Kanban-Board-using-Angular-and-Springboot)https://github.com/Atulshekhawat/Kanban-Board-using-Angular-and-Springboot.git
-
+   
 2. Front-end Part:
   
   -> npm install 
 
   -> ng serve
 
-
 3. Back-end Part:
 
-   -> start all services (First Eureka service then all services)
+   -> Start all services (First Eureka service then all services)

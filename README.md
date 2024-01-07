@@ -18,7 +18,7 @@ This project is a Kanban Board application developed using Angular for the front
 
 - Node.js and npm for Angular development.
 - Java and Maven for Spring Boot backend.
-- Database (e.g., MySQL, PostgreSQL) configured and running.
+- Database (e.g., MySQL, MongoDb) configured and running.
 
 ### Installation
 

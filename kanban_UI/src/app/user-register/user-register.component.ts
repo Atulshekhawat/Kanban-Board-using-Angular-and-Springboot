@@ -32,19 +32,19 @@ export class UserRegisterComponent {
         let mailBody = {
           recipient: this.userData.userEmail,
           msgBody: `
-          Dear User,
+          Dear ${this.userData.userName},
                   
-          Thank you for registering with our Kanban Board Service! Your registration was successful. You can now log in to your account and start managing your projects efficiently.
+          Thank you for registering with our Kanban Board Service! Your registration is successful. You can now log in to your account and start managing your projects efficiently.
                   
           Best regards,
           Atul Singh
-          KanBan Board Service
+          Team : Work Planner
           `,
-          subject: 'Register Successfully Team: KanBan Board'
+          subject: 'Register Successfully Team: Work Planner'
         };
-        // this.UserServiceService.sendMail(mailBody).subscribe((resp)=>{
-        //   console.log(resp);
-        // });
+        this.UserServiceService.sendMail(mailBody).subscribe((resp)=>{
+          console.log(resp);
+        });
       },
       (err)=>{
         this.toaster.error("User Already Exist");

@@ -30,7 +30,7 @@
         <mat-form-field>
           <mat-label>User Role</mat-label>
           <mat-select name="role" [(ngModel)]="userData.role" required #role="ngModel">
-            <mat-option value="Team Leader">Team Leader</mat-option>
+            <mat-option value="Team Leader">Admin</mat-option>
             <mat-option value="Team Member">Team Member</mat-option>
           </mat-select>
           <mat-error *ngIf="password.errors?.['required']">

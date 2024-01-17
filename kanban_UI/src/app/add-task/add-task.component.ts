@@ -29,7 +29,7 @@ export class AddTaskComponent {
         let mailBody = {
           recipient: this.taskData.assignedTo,
           msgBody: `Dear User,
-        A new task has been added by you in Kanban Board! 
+        A new task has been added to you by ${sessionStorage.getItem('userEmail')} in Kanban Board! 
         Details of the task:
         - Task Title: ${this.taskData.taskName}
         - Description: ${this.taskData.taskDescription}
@@ -41,13 +41,13 @@ export class AddTaskComponent {
         
         Best regards,
         Atul Singh
-        KanBan Board Pvt. Ltd.`,
+        Team : Work Planner `,
           subject: 'Task Added Successfully',
         };
 
-        // this.userService.sendMail(mailBody).subscribe((resp)=>{
-        //   console.log(resp);
-        // });
+        this.userService.sendMail(mailBody).subscribe((resp)=>{
+          console.log(resp);
+        });
         this.toastr.success('Task Added Successfully');
         this.router.navigate(['dashboard']);
       },
